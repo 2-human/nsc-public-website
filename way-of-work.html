@@ -1,227 +1,718 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Way of Work · North Star Communications</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,400;0,500;0,800;1,200;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
-        html, body { margin: 0; padding: 0; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: #f8fafc;
-            color: #0f172a;
-            font-weight: 400;
-            line-height: 1.65;
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: #F4F1EA;
+            color: var(--ink);
             padding: 2.5rem 1.5rem;
         }
 
-        /* ---------- Doc container ---------- */
-        .doc-container { max-width: 720px; margin: 0 auto; }
+        .wrapper { max-width: 1020px; margin: 0 auto; }
 
-        h1.doc-title {
-            font-weight: 700;
-            font-size: clamp(2rem, 4vw, 2.75rem);
+        /* ───── Editorial intro / outcome sections ───── */
+        .intro, .outcome {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: clamp(56px, 7vw, 96px) 0;
+        }
+        .intro__eyebrow, .outcome__eyebrow {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: rgba(0,0,0,0.55);
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        .intro__title, .outcome__title {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-weight: 400;
+            letter-spacing: -0.015em;
+            line-height: 1.02;
+            color: #0B0B0C;
+            margin-bottom: 28px;
+        }
+        .intro__title {
+            font-size: clamp(48px, 9vw, 140px);
             letter-spacing: -0.02em;
-            line-height: 1.15;
-            margin: 0 0 2rem;
-            color: #0f172a;
+            max-width: 14ch;
         }
-        h2.doc-h2 {
-            font-weight: 600;
-            font-size: 1.4rem;
-            letter-spacing: -0.01em;
-            margin: 3rem 0 1rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e2e8f0;
-            color: #0f172a;
+        .outcome__title {
+            font-size: clamp(40px, 6vw, 96px);
+            max-width: 18ch;
         }
-        h3.doc-h3 {
-            font-weight: 600;
-            font-size: 1.125rem;
-            margin: 2rem 0 0.5rem;
+        .intro__title em, .outcome__title em {
+            font-style: italic; font-weight: 400;
+        }
+        .intro__body, .outcome__body {
+            font-size: clamp(18px, 1.4vw, 22px);
+            font-weight: 200;
+            line-height: 1.45;
+            letter-spacing: -0.005em;
+            color: #0B0B0C;
+            max-width: 60ch;
+        }
+        .outcome {
+            border-top: 1px solid rgba(0,0,0,0.12);
+            margin-top: 16px;
+        }
+
+        .diagram-stage {
+            background: white;
+            border-radius: 14px;
+            padding: 2rem 1.5rem 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        svg#diagram { width: 100%; display: block; }
+
+        .track-group { transition: opacity 0.22s ease; }
+        .track-group.dimmed { opacity: 0.12; }
+        .track-hit { cursor: pointer; fill: transparent; }
+        .node-group { cursor: pointer; }
+        .arrow-group { cursor: pointer; }
+
+        .attribution {
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(0,0,0,0.4);
+            margin-top: 0.75rem;
+        }
+
+        .attribution strong { color: var(--mute); font-weight: 600; }
+
+        .hint {
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(0,0,0,0.4);
+            margin-top: 0.35rem;
+            letter-spacing: 0.03em;
+        }
+
+        .detail {
+            display: none;
+            margin-top: 2rem;
+            background: #fff;
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .detail.open {
+            display: block;
+            animation: rise 0.28s ease forwards;
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-header {
             display: flex;
             align-items: center;
-            gap: 0.625rem;
-            color: #0f172a;
+            gap: 0.875rem;
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
         }
-        .doc-chip {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        p.doc-p {
-            margin: 0 0 1rem;
-            font-size: 1.0625rem;
-            color: #334155;
-        }
-        .doc-callout {
-            margin: 2rem 0 2.5rem;
-            padding: 1.25rem 1.5rem;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.375rem;
-        }
-        .doc-callout-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #64748b;
-        }
-        .doc-callout-link {
-            color: #0f172a;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-        .doc-callout-link:hover { text-decoration: underline; }
-        .doc-callout-link::after { content: ' →'; color: #64748b; font-weight: 400; }
-        .doc-attribution {
-            margin: 4rem 0 0;
-            padding-top: 2rem;
-            border-top: 1px solid #e2e8f0;
-            font-size: 0.875rem;
-            color: #94a3b8;
-        }
+
+        .color-pill { width: 10px; height: 38px; border-radius: 6px; flex-shrink: 0; }
+        .detail-header h2 { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+        .detail-header p { font-size: 0.78rem; color: rgba(0,0,0,0.4); margin-top: 0.15rem; }
+        .detail-body { font-size: 0.85rem; line-height: 1.72; color: rgba(0,0,0,0.6); }
 
         /* ---------- Main nav ---------- */
         .site-nav {
-            padding: 1rem 1.5rem;
-            background: #fff;
-            border-bottom: 1px solid #e2e8f0;
             margin: -2.5rem -1.5rem 2.5rem;
+            padding: 1rem 1.5rem;
+            background: #F4F1EA;
+            border-bottom: 1px solid var(--rule);
         }
         .site-nav-inner {
-            max-width: 1024px;
+            max-width: 1020px;
             margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 1.5rem;
+            flex-wrap: wrap;
         }
         .site-nav-brand {
+            font-size: 0.875rem;
             font-weight: 600;
-            font-size: 0.9375rem;
-            color: #0f172a;
+            color: var(--ink);
             text-decoration: none;
+            letter-spacing: -0.005em;
         }
         .site-nav-links {
             display: flex;
-            gap: 1.25rem;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
         }
         .site-nav-link {
-            color: #64748b;
             font-size: 0.875rem;
+            color: var(--mute);
             text-decoration: none;
-            font-weight: 500;
             padding-bottom: 2px;
-            border-bottom: 2px solid transparent;
+            border-bottom: 1px solid transparent;
         }
-        .site-nav-link:hover { color: #0f172a; }
+        .site-nav-link:hover { color: var(--ink); }
         .site-nav-link.active {
-            color: #0f172a;
-            border-bottom-color: #0f172a;
+            color: var(--ink);
+            font-weight: 500;
+            border-bottom-color: var(--ink);
         }
-        @media (max-width: 580px) {
+        @media (max-width: 620px) {
             .site-nav { padding: 0.75rem 1rem; margin: -2.5rem -1.5rem 2rem; }
             .site-nav-inner { gap: 0.75rem; }
             .site-nav-links { gap: 0.875rem; }
             .site-nav-link, .site-nav-brand { font-size: 0.8125rem; }
         }
-    </style>
+    
+        :root {
+            --paper: #F4F1EA;
+            --ink: #0B0B0C;
+            --rule: rgba(0,0,0,0.12);
+            --mute: rgba(0,0,0,0.55);
+        }
+        .grain {
+            position: fixed; inset: 0; pointer-events: none; z-index: 50;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat; background-size: 128px;
+            mix-blend-mode: multiply;
+        }
+        .site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); font-size: 15px; }
+        .site-nav-brand .brand-star { width: 20px; height: 20px; color: var(--ink); display: inline-block; }
+        .site-nav-brand .brand-star svg { width: 100%; height: 100%; display: block; }
+        .site-nav-brand .brand-wm { display: flex; align-items: baseline; gap: 6px; letter-spacing: 0.03em; }
+        .site-nav-brand .brand-name { font-weight: 500; text-transform: uppercase; }
+        .site-nav-brand .brand-slash { font-weight: 300; color: var(--mute); }
+        .site-nav-brand .brand-tag { font-family: 'DM Serif Display', Georgia, serif; font-style: italic; font-weight: 400; font-size: 17px; }
+        h1.doc-title, h2.doc-h2, .page-header h1 {
+            font-family: 'DM Serif Display', Georgia, serif !important;
+            font-weight: 400 !important;
+            letter-spacing: -0.015em !important;
+        }
+</style>
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="star" viewBox="0 0 41 41">
+      <path d="M20.4927 41L17.9311 33.3152C17.1376 30.9282 15.7982 28.7591 14.0195 26.9804C12.2408 25.2017 10.0718 23.8624 7.68476 23.0689L0 20.4927L7.68476 17.9311C10.0718 17.1376 12.2408 15.7982 14.0195 14.0195C15.7982 12.2408 17.1376 10.0718 17.9311 7.68475L20.4927 0L23.0543 7.6994C23.8585 10.0723 25.2025 12.2262 26.9805 13.9915C28.7585 15.7568 30.922 17.0854 33.3006 17.8725L41 20.4341L33.3006 23.0103C30.9136 23.8039 28.7445 25.1432 26.9658 26.9219C25.1871 28.7006 23.8478 30.8697 23.0543 33.2567L20.4927 41ZM9.28026 20.5073C11.8426 21.4693 14.1692 22.9691 16.1032 24.9057C18.0373 26.8423 19.5341 29.1707 20.4927 31.7344C21.4521 29.1688 22.9508 26.839 24.8876 24.9022C26.8244 22.9654 29.1542 21.4667 31.7197 20.5073C29.1561 19.5487 26.8277 18.0519 24.891 16.1179C22.9544 14.1838 21.4547 11.8573 20.4927 9.2949C19.5452 11.8682 18.0527 14.2064 16.1174 16.1492C14.1822 18.0921 11.8499 19.5937 9.28026 20.5512V20.5073Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+<div class="grain" aria-hidden="true"></div>
+
 <nav class="site-nav" aria-label="Main">
     <div class="site-nav-inner">
-        <a href="./home.html" class="site-nav-brand">North Star Communications</a>
+        <a href="./home.html" class="site-nav-brand" aria-label="North Star Communications">
+            <span class="brand-star"><svg><use href="#star"/></svg></span>
+            <span class="brand-wm">
+                <span class="brand-name">North&nbsp;Star</span>
+                <span class="brand-slash">/</span>
+                <span class="brand-tag">Communications</span>
+            </span>
+        </a>
         <div class="site-nav-links">
             <a href="./home.html" class="site-nav-link">Home</a>
+            <a href="./quick-start.html" class="site-nav-link">Quick Start</a>
             <a href="./way-of-work.html" class="site-nav-link active" aria-current="page">The Way of Work</a>
             <a href="./communications-compass.html" class="site-nav-link">The Communications Compass</a>
         </div>
     </div>
 </nav>
+<div class="wrapper">
 
-<article class="doc-container">
+    <section class="intro">
+        <div class="intro__eyebrow">The Way of Work</div>
+        <h1 class="intro__title">Four tracks, <em>running together</em>.</h1>
+        <p class="intro__body">You already have a brand, a message, and ways of reaching the people who matter to you. The Way of Work is how we build on what's there: four parallel tracks that move through every engagement together, generating direction, putting it in front of real audiences, learning from how those audiences respond, and folding what works back into the practice itself.</p>
+    </section>
 
-    <h1 class="doc-title">Way of Work (WoW)</h1>
+    <div class="diagram-stage">
+        <!--
+        GEOMETRY
+        ═══════════════════════════════════════════════════════════════
+        Track y-positions (equal spacing Δ=110):
+          Discovery   y = 80
+          Delivery    y = 190
+          Validation  y = 300
+          Integration y = 410
 
-    <h2 class="doc-h2">What It Is</h2>
+        Horizontal step dx = 75  |  V-return arm = 2×dx = 150
+        Slope of every leg: 110/75 = 1.467  →  all V shapes are symmetric
 
-    <p class="doc-p">Whenever you come to us, you already have something to work with. You have a brand, a message, and a way of talking to your market, your team, your customers, and your partners. Rather than starting from scratch, we treat everything you have as a set of ideas and assumptions about who you are and how you create value, expressed through the interfaces you already use to reach your audiences. Our first job is to audit all of it honestly: what is landing, what is falling short, and what needs to go entirely.</p>
+        Each V arm is bisected by the Delivery track:
+          Left  arm:  Direction  →  Interface  →  Behavior
+          Right arm:  Behavior   →  Learning   →  Direction
 
-    <p class="doc-p">From there, we work in four parallel tracks that run continuously throughout our time together. You will experience them as episodes rather than phases, each with its own rhythm and duration depending on what the work demands.</p>
+        Node x-positions:
+          D1=250  I1=325  B1=400  L1=475  D2=550
+                          I2=625  B2=700  L2=775  D3=850
 
-    <div class="doc-callout">
-        <span class="doc-callout-label">See it in motion</span>
-        <a href="./how-we-work.html" class="doc-callout-link">Open the interactive Way of Work diagram</a>
+        Integration nodes directly below L1 and L2: x=475 and x=775, y=410
+        ═══════════════════════════════════════════════════════════════
+        -->
+        <svg id="diagram" viewBox="0 0 980 470" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5"
+                    markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(0,0,0,0.4)"/>
+                </marker>
+                <marker id="arr-purple" viewBox="0 0 10 10" refX="8" refY="5"
+                    markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M 0 1 L 9 5 L 0 9 z" fill="#7c3aed" opacity="0.6"/>
+                </marker>
+            </defs>
+
+            <!-- ═════════════════════════════════════════
+                 DISCOVERY TRACK   y = 80
+                 ═════════════════════════════════════════ -->
+            <g class="track-group" id="tg-discovery" data-id="discovery">
+                <rect x="0" y="58" width="980" height="44" class="track-hit" onclick="selectTrack('discovery')"/>
+                <line x1="202" y1="80" x2="940" y2="80"
+                    stroke="#0369a1" stroke-width="2.5" stroke-opacity="0.45"/>
+                <line x1="940" y1="80" x2="968" y2="80"
+                    stroke="#0369a1" stroke-width="1.5" stroke-opacity="0.2" stroke-dasharray="5,4"/>
+                <polygon points="968,80 961,76 961,84" fill="#0369a1" opacity="0.25"/>
+
+                <!-- D1 -->
+                <g class="node-group" onclick="selectElement('direction')">
+                    <circle cx="250" cy="80" r="22" fill="transparent"/>
+                    <circle cx="250" cy="80" r="12" fill="#0369a1" stroke="white" stroke-width="2.5"/>
+                    <text x="250" y="63" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#0369a1">Direction</text>
+                </g>
+                <!-- D2 -->
+                <g class="node-group" onclick="selectElement('direction')">
+                    <circle cx="550" cy="80" r="22" fill="transparent"/>
+                    <circle cx="550" cy="80" r="12" fill="#0369a1" stroke="white" stroke-width="2.5"/>
+                    <text x="550" y="63" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#0369a1">Direction</text>
+                </g>
+                <!-- D3 faded -->
+                <g class="node-group" onclick="selectElement('direction')" opacity="0.65">
+                    <circle cx="850" cy="80" r="22" fill="transparent"/>
+                    <circle cx="850" cy="80" r="12" fill="#0369a1" stroke="white" stroke-width="2.5"/>
+                    <text x="850" y="63" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#0369a1">Direction</text>
+                </g>
+
+                <!-- Track label -->
+                <text x="192" y="73" text-anchor="end"
+                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#7cb9e0">Continual</text>
+                <text x="192" y="88" text-anchor="end"
+                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0369a1">Discovery</text>
+            </g>
+
+            <!-- ═════════════════════════════════════════
+                 DELIVERY TRACK   y = 190
+                 ═════════════════════════════════════════ -->
+            <g class="track-group" id="tg-delivery" data-id="delivery">
+                <rect x="0" y="168" width="980" height="44" class="track-hit" onclick="selectTrack('delivery')"/>
+                <line x1="202" y1="190" x2="940" y2="190"
+                    stroke="#15803d" stroke-width="2.5" stroke-opacity="0.45"/>
+                <line x1="940" y1="190" x2="968" y2="190"
+                    stroke="#15803d" stroke-width="1.5" stroke-opacity="0.2" stroke-dasharray="5,4"/>
+                <polygon points="968,190 961,186 961,194" fill="#15803d" opacity="0.25"/>
+
+                <!-- I1: label above -->
+                <g class="node-group" onclick="selectElement('interface')">
+                    <circle cx="325" cy="190" r="22" fill="transparent"/>
+                    <circle cx="325" cy="190" r="12" fill="#15803d" stroke="white" stroke-width="2.5"/>
+                    <text x="325" y="173" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#15803d">Interface</text>
+                </g>
+                <!-- L1: label below -->
+                <g class="node-group" onclick="selectElement('learning')">
+                    <circle cx="475" cy="190" r="22" fill="transparent"/>
+                    <circle cx="475" cy="190" r="12" fill="#15803d" stroke="white" stroke-width="2.5"/>
+                    <text x="475" y="214" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#15803d">Learning</text>
+                </g>
+                <!-- I2: label above -->
+                <g class="node-group" onclick="selectElement('interface')">
+                    <circle cx="625" cy="190" r="22" fill="transparent"/>
+                    <circle cx="625" cy="190" r="12" fill="#15803d" stroke="white" stroke-width="2.5"/>
+                    <text x="625" y="173" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#15803d">Interface</text>
+                </g>
+                <!-- L2 faded: label below -->
+                <g class="node-group" onclick="selectElement('learning')" opacity="0.65">
+                    <circle cx="775" cy="190" r="22" fill="transparent"/>
+                    <circle cx="775" cy="190" r="12" fill="#15803d" stroke="white" stroke-width="2.5"/>
+                    <text x="775" y="214" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#15803d">Learning</text>
+                </g>
+
+                <!-- Track label -->
+                <text x="192" y="183" text-anchor="end"
+                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#86c98e">Continual</text>
+                <text x="192" y="198" text-anchor="end"
+                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#15803d">Delivery</text>
+            </g>
+
+            <!-- ═════════════════════════════════════════
+                 VALIDATION TRACK   y = 300
+                 ═════════════════════════════════════════ -->
+            <g class="track-group" id="tg-validation" data-id="validation">
+                <rect x="0" y="278" width="980" height="44" class="track-hit" onclick="selectTrack('validation')"/>
+                <line x1="202" y1="300" x2="940" y2="300"
+                    stroke="#be185d" stroke-width="2.5" stroke-opacity="0.45"/>
+                <line x1="940" y1="300" x2="968" y2="300"
+                    stroke="#be185d" stroke-width="1.5" stroke-opacity="0.2" stroke-dasharray="5,4"/>
+                <polygon points="968,300 961,296 961,304" fill="#be185d" opacity="0.25"/>
+
+                <!-- B1 -->
+                <g class="node-group" onclick="selectElement('behavior')">
+                    <circle cx="400" cy="300" r="22" fill="transparent"/>
+                    <circle cx="400" cy="300" r="12" fill="#be185d" stroke="white" stroke-width="2.5"/>
+                    <text x="400" y="323" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#be185d">Behavior</text>
+                </g>
+                <!-- B2 -->
+                <g class="node-group" onclick="selectElement('behavior')">
+                    <circle cx="700" cy="300" r="22" fill="transparent"/>
+                    <circle cx="700" cy="300" r="12" fill="#be185d" stroke="white" stroke-width="2.5"/>
+                    <text x="700" y="323" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#be185d">Behavior</text>
+                </g>
+
+                <!-- Track label -->
+                <text x="192" y="293" text-anchor="end"
+                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#e8799f">Continual</text>
+                <text x="192" y="308" text-anchor="end"
+                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#be185d">Validation</text>
+            </g>
+
+            <!-- ═════════════════════════════════════════
+                 INTEGRATION TRACK   y = 410
+                 ═════════════════════════════════════════ -->
+            <g class="track-group" id="tg-integration" data-id="integration">
+                <rect x="0" y="388" width="980" height="44" class="track-hit" onclick="selectTrack('integration')"/>
+                <line x1="202" y1="410" x2="940" y2="410"
+                    stroke="#7c3aed" stroke-width="2.5" stroke-opacity="0.45"/>
+                <line x1="940" y1="410" x2="968" y2="410"
+                    stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.2" stroke-dasharray="5,4"/>
+                <polygon points="968,410 961,406 961,414" fill="#7c3aed" opacity="0.25"/>
+
+                <!-- Applied Learning node (directly below L1) -->
+                <g class="node-group" onclick="selectElement('applied_learning')">
+                    <circle cx="475" cy="410" r="22" fill="transparent"/>
+                    <circle cx="475" cy="410" r="12" fill="#7c3aed" stroke="white" stroke-width="2.5"/>
+                    <text x="475" y="433" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#7c3aed">Applied Learning</text>
+                </g>
+                <!-- Applied Learning node (directly below L2) -->
+                <g class="node-group" onclick="selectElement('applied_learning')">
+                    <circle cx="775" cy="410" r="22" fill="transparent"/>
+                    <circle cx="775" cy="410" r="12" fill="#7c3aed" stroke="white" stroke-width="2.5"/>
+                    <text x="775" y="433" text-anchor="middle"
+                        font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
+                        fill="#7c3aed">Applied Learning</text>
+                </g>
+
+                <!-- Track label -->
+                <text x="192" y="403" text-anchor="end"
+                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#b799f0">Continual</text>
+                <text x="192" y="418" text-anchor="end"
+                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#7c3aed">Integration</text>
+            </g>
+
+            <!-- ═════════════════════════════════════════
+                 FLOW ARROWS
+                 Unit vector for slope 110/75:  (0.564, ±0.827)
+                 Node offset = 12px in arrow direction
+                 Each arrow group has an invisible fat line as a hit area
+                 ═════════════════════════════════════════ -->
+
+            <!-- ── V1 LEFT ARM ──────────────────────────── -->
+
+            <!-- D1(250,80) → Interface1(325,190)   "Develop" -->
+            <g class="arrow-group" onclick="selectElement('develop')">
+                <line x1="257" y1="90" x2="318" y2="180" stroke="transparent" stroke-width="18"/>
+                <line x1="257" y1="90" x2="318" y2="180"
+                    stroke="rgba(0,0,0,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+                <rect x="230" y="128" width="52" height="16" rx="4" fill="white" opacity="0.93"/>
+                <text x="256" y="140" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="var(--mute)">Develop</text>
+            </g>
+
+            <!-- Interface1(325,190) → Behavior1(400,300)   "Communicate" -->
+            <g class="arrow-group" onclick="selectElement('communicate')">
+                <line x1="332" y1="200" x2="393" y2="290" stroke="transparent" stroke-width="18"/>
+                <line x1="332" y1="200" x2="393" y2="290"
+                    stroke="rgba(0,0,0,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+                <rect x="305" y="238" width="72" height="16" rx="4" fill="white" opacity="0.93"/>
+                <text x="341" y="250" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="var(--mute)">Communicate</text>
+            </g>
+
+            <!-- ── V1 RIGHT ARM ─────────────────────────── -->
+
+            <!-- Behavior1(400,300) → Learning1(475,190)   "Observe & Measure" -->
+            <g class="arrow-group" onclick="selectElement('observe_measure')">
+                <line x1="407" y1="290" x2="468" y2="200" stroke="transparent" stroke-width="18"/>
+                <line x1="407" y1="290" x2="468" y2="200"
+                    stroke="rgba(0,0,0,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+                <rect x="424" y="234" width="88" height="16" rx="4" fill="white" opacity="0.93"/>
+                <text x="468" y="246" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="var(--mute)">Observe &amp; Measure</text>
+            </g>
+
+            <!-- Learning1(475,190) → D2(550,80)   "Research & Ideate" -->
+            <g class="arrow-group" onclick="selectElement('research_ideate')">
+                <line x1="482" y1="180" x2="543" y2="90" stroke="transparent" stroke-width="18"/>
+                <line x1="482" y1="180" x2="543" y2="90"
+                    stroke="rgba(0,0,0,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+                <rect x="476" y="124" width="82" height="28" rx="4" fill="white" opacity="0.93"/>
+                <text x="517" y="135" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="var(--mute)">Research</text>
+                <text x="517" y="147" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="var(--mute)">&amp; Ideate</text>
+            </g>
+
+            <!-- ── V2 LEFT ARM (pattern established, no labels) ── -->
+
+            <!-- D2(550,80) → Interface2(625,190) -->
+            <g class="arrow-group" onclick="selectElement('develop')">
+                <line x1="557" y1="90" x2="618" y2="180" stroke="transparent" stroke-width="18"/>
+                <line x1="557" y1="90" x2="618" y2="180"
+                    stroke="rgba(0,0,0,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+            </g>
+
+            <!-- Interface2(625,190) → Behavior2(700,300) -->
+            <g class="arrow-group" onclick="selectElement('communicate')">
+                <line x1="632" y1="200" x2="693" y2="290" stroke="transparent" stroke-width="18"/>
+                <line x1="632" y1="200" x2="693" y2="290"
+                    stroke="rgba(0,0,0,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+            </g>
+
+            <!-- ── V2 RIGHT ARM ─────────────────────────── -->
+
+            <!-- Behavior2(700,300) → Learning2(775,190)   "Observe & Measure" -->
+            <g class="arrow-group" onclick="selectElement('observe_measure')">
+                <line x1="707" y1="290" x2="768" y2="200" stroke="transparent" stroke-width="18"/>
+                <line x1="707" y1="290" x2="768" y2="200"
+                    stroke="rgba(0,0,0,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+                <rect x="724" y="234" width="88" height="16" rx="4" fill="white" opacity="0.93"/>
+                <text x="768" y="246" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="var(--mute)">Observe &amp; Measure</text>
+            </g>
+
+            <!-- Learning2(775,190) → D3(850,80)   "Research & Ideate" -->
+            <g class="arrow-group" onclick="selectElement('research_ideate')">
+                <line x1="782" y1="180" x2="843" y2="90" stroke="transparent" stroke-width="18"/>
+                <line x1="782" y1="180" x2="843" y2="90"
+                    stroke="rgba(0,0,0,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+                <rect x="776" y="124" width="82" height="28" rx="4" fill="white" opacity="0.93"/>
+                <text x="817" y="135" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="var(--mute)">Research</text>
+                <text x="817" y="147" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="var(--mute)">&amp; Ideate</text>
+            </g>
+
+            <!-- ── INTEGRATE (vertical from L1) ──────────── -->
+
+            <!-- Learning1(475,190) → AppliedLearning(475,410)   "Integrate" -->
+            <g class="arrow-group" onclick="selectElement('integrate')">
+                <line x1="475" y1="202" x2="475" y2="398" stroke="transparent" stroke-width="18"/>
+                <line x1="475" y1="202" x2="475" y2="398"
+                    stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.55" stroke-dasharray="5,3"
+                    marker-end="url(#arr-purple)"/>
+                <rect x="415" y="292" width="52" height="16" rx="4" fill="white" opacity="0.93"/>
+                <text x="441" y="304" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="#7c3aed" font-weight="600">Integrate</text>
+            </g>
+
+            <!-- ── INTEGRATE (vertical from L2) ──────────── -->
+
+            <!-- Learning2(775,190) → AppliedLearning(775,410)   "Integrate" -->
+            <g class="arrow-group" onclick="selectElement('integrate')">
+                <line x1="775" y1="202" x2="775" y2="398" stroke="transparent" stroke-width="18"/>
+                <line x1="775" y1="202" x2="775" y2="398"
+                    stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.55" stroke-dasharray="5,3"
+                    marker-end="url(#arr-purple)"/>
+                <rect x="715" y="292" width="52" height="16" rx="4" fill="white" opacity="0.93"/>
+                <text x="741" y="304" text-anchor="middle"
+                    font-family="Inter, system-ui, sans-serif" font-size="9" fill="#7c3aed" font-weight="600">Integrate</text>
+            </g>
+
+        </svg>
     </div>
 
-    <h2 class="doc-h2">The Four Tracks</h2>
+    <p class="hint">Select a track, node, or connection to explore</p>
 
-    <h3 class="doc-h3"><span class="doc-chip" style="background:#0369a1"></span>Discovery</h3>
-    <p class="doc-p">Discovery is where we develop and refine the directions that shape your communications with each audience. What are we trying to say, to whom, and why do we believe it will resonate? After every cycle, the learning we gather surfaces new ideas and assumptions, which become the starting point for new directions in the next episode. Discovery never stops because the learning never stops.</p>
+    <div class="detail" id="detail"></div>
 
-    <h3 class="doc-h3"><span class="doc-chip" style="background:#15803d"></span>Delivery</h3>
-    <p class="doc-p">Delivery is where we build the interfaces that carry your value ideas to the people you are trying to reach. These are the campaigns, content, events, and materials that give your message a form your audiences can actually experience. This is where we build with you, and where your involvement is often most active. Each Delivery cycle passes through a Learning node, where everything observed about audience behavior gets synthesized before feeding the next Discovery episode and flowing into Integration.</p>
+    <section class="outcome">
+        <div class="outcome__eyebrow">What it builds</div>
+        <h2 class="outcome__title">An organization that <em>learns as it goes</em>.</h2>
+        <p class="outcome__body">The goal isn't a finished product. It's an organization that communicates more clearly with every cycle, reaches more of the right people as the work matures, and gets steadily better at building on what it actually learns rather than what it once assumed.</p>
+    </section>
 
-    <h3 class="doc-h3"><span class="doc-chip" style="background:#be185d"></span>Validation</h3>
-    <p class="doc-p">Validation is where we find out what is actually happening. How are your audiences responding? What behavior are we seeing, and what does it tell us about the directions we set and the assumptions we started with? Every Behavior node on the Validation track feeds directly into a Learning node on the Delivery track, where the evidence is synthesized into clear decisions about what to apply and what to leave behind. Validation is how we keep the work grounded in reality rather than in intention.</p>
+</div>
 
-    <h3 class="doc-h3"><span class="doc-chip" style="background:#7c3aed"></span>Integration</h3>
-    <p class="doc-p">Integration is where learning becomes practice. We always integrate the learning from every episode, applying what worked and removing what did not. What is working gets applied as regular practice, becoming part of how your organization consistently shows up. What is not working gets removed, so the activity you sustain is always grounded in evidence rather than habit or assumption. Each episode leaves your communications stronger than before, and that stronger position becomes the starting point for the next cycle.</p>
+<script>
+const TRACKS = {
+    discovery: {
+        label: 'Discovery',
+        subtitle: 'Continual',
+        color: '#0369a1',
+        description: 'Discovery is where we develop and refine the directions that shape your communications with each audience. What are we trying to say, to whom, and why do we believe it will resonate? After every cycle, the learning we gather surfaces new ideas and assumptions, which become the starting point for new directions in the next episode. Discovery never stops because the learning never stops.'
+    },
+    delivery: {
+        label: 'Delivery',
+        subtitle: 'Continual',
+        color: '#15803d',
+        description: 'Delivery is where we build the interfaces that carry your value ideas to the people you are trying to reach. These are the campaigns, content, events, and materials that give your message a form your audiences can actually experience. This is where we build with you, and where your involvement is often most active. Each Delivery cycle passes through a Learning node, where everything observed about audience behavior gets synthesized before feeding the next Discovery episode and flowing into Integration.'
+    },
+    validation: {
+        label: 'Validation',
+        subtitle: 'Continual',
+        color: '#be185d',
+        description: 'Validation is where we find out what is actually happening. How are your audiences responding? What behavior are we seeing, and what does it tell us about the directions we set and the assumptions we started with? Every Behavior node on the Validation track feeds directly into a Learning node on the Delivery track, where the evidence is synthesized into clear decisions about what to apply and what to leave behind. Validation is how we keep the work grounded in reality rather than in intention.'
+    },
+    integration: {
+        label: 'Integration',
+        subtitle: 'Continual',
+        color: '#7c3aed',
+        description: 'Integration is where learning becomes practice. Everything we observe and measure flows here through the Learning node, where we make clear decisions about what to carry forward and what to let go. What is working gets applied as regular practice, becoming part of how your organization consistently shows up. What is not working gets removed, so the activity you sustain is always grounded in evidence rather than habit or assumption. Each episode leaves your communications stronger than before, and that stronger position becomes the starting point for the next cycle.'
+    }
+};
 
-    <h2 class="doc-h2">How a Cycle Unfolds</h2>
+const ELEMENTS = {
+    direction: {
+        label: 'Direction',
+        subtitle: 'Discovery: the hypothesis that starts each episode',
+        color: '#0369a1',
+        description: 'A Direction is where each episode begins. It captures a specific hypothesis about who we are trying to reach, what we want to say to them, and why we believe it will land. Directions are informed assumptions, not final decisions. The rest of the cycle either validates or challenges them. After each episode of learning, new Directions take shape, refined by what the previous cycle revealed. The quality of a Direction shapes everything that follows.'
+    },
+    interface: {
+        label: 'Interface',
+        subtitle: 'Delivery: the form a Direction takes in the world',
+        color: '#15803d',
+        description: 'An Interface is the form a Direction takes in the world. It could be a campaign, a piece of content, an event, a product communication, or any other channel through which a value idea reaches an audience. Building the Interface is where strategy becomes craft, and where your involvement in the work is often most hands-on. An Interface is not the message itself. It is the vehicle the message travels in, designed to reach a specific person in a specific context.'
+    },
+    learning: {
+        label: 'Learning',
+        subtitle: 'Delivery: where observation becomes knowledge',
+        color: '#15803d',
+        description: 'A Learning node sits at the turning point of each cycle. It brings together everything observed through Validation: what behavior the Interface generated, what that behavior says about the original Direction, and what it implies for what we should do next. Learning is where raw evidence becomes usable knowledge. From here, two things happen at once: new Directions take shape through Discovery, and the evidence flows into Integration to inform what to apply or remove from practice.'
+    },
+    behavior: {
+        label: 'Behavior',
+        subtitle: 'Validation: what audiences actually do',
+        color: '#be185d',
+        description: 'A Behavior node captures what audiences actually do in response to an Interface, not what we hoped they would do or what they say they might do. Behavior is the evidence that tests the Direction, and it is the most reliable signal we have about whether the communication is working. Every Behavior node feeds directly into a Learning node, where the full picture gets synthesized before it shapes what comes next.'
+    },
+    applied_learning: {
+        label: 'Applied Learning',
+        subtitle: 'Integration: where learning becomes practice',
+        color: '#7c3aed',
+        description: 'Applied Learning is where the cycle\'s evidence becomes practice. We always integrate the learning from every episode, applying what worked and removing what did not. Activities that generated the behavior we were looking for get sustained as regular practice. Activities that did not get the results we were looking for get removed or redesigned. There is no carrying forward of things that do not work. What remains after each episode is a communications practice that is more targeted, more consistent, and more grounded in evidence than it was before.'
+    },
+    develop: {
+        label: 'Develop',
+        subtitle: 'Direction \u2192 Interface',
+        color: 'var(--mute)',
+        description: 'A Direction becomes an Interface. We take the hypothesis about what to say, to whom, and through what kind of experience, and translate it into something designed to be encountered. This is where the thinking becomes making: the campaign gets built, the content gets written, the event gets planned. The Direction shapes every creative and executional decision we make, keeping the work coherent from concept through to delivery.'
+    },
+    communicate: {
+        label: 'Communicate',
+        subtitle: 'Interface \u2192 Behavior',
+        color: 'var(--mute)',
+        description: 'The Interface reaches its audience. This is the point at which the work enters the world and begins to generate real responses. Communicate covers everything involved in getting the Interface in front of the right people: publication, distribution, activation, amplification. Once an Interface is live, the relationship between your communication and your audience is no longer hypothetical, and the Validation track starts to gather the evidence of how they respond.'
+    },
+    observe_measure: {
+        label: 'Observe &amp; Measure',
+        subtitle: 'Behavior \u2192 Learning',
+        color: 'var(--mute)',
+        description: 'Once an Interface is live, we watch closely and measure consistently. Observation captures the qualitative dimension: what people say, how they engage, what they ignore. Measurement captures the quantitative dimension: how many, how often, for how long. Together they give us a complete picture of audience behavior rather than a partial one. The pairing of observation and measurement is what makes the Learning at the next node something we can act on with confidence.'
+    },
+    research_ideate: {
+        label: 'Research &amp; Ideate',
+        subtitle: 'Learning \u2192 Direction',
+        color: 'var(--mute)',
+        description: 'Learning flows back into Discovery. We bring together what we observed in the most recent cycle with broader research about audience, context, and market to generate new ideas and sharpen existing assumptions. This is the generative part of the work, where curiosity and evidence meet. The ideas that survive this stage become the Directions for the next episode, and the cycle begins again with more knowledge than it started with.'
+    },
+    integrate: {
+        label: 'Integrate',
+        subtitle: 'Learning \u2192 Applied Learning',
+        color: '#7c3aed',
+        description: 'Learning flows directly into practice. This connection carries the evidence from each cycle into the decisions about what to apply, what to sustain, and what to remove. Integration is not a separate phase that happens at the end of a project. It runs continuously, meaning the practice gets refined with every episode rather than waiting for a major review. The quality of this connection is what separates organizations that build on what they learn from those that simply repeat what they have always done.'
+    }
+};
 
-    <p class="doc-p">Every episode of work follows the same sequence. Understanding each step and what it produces helps you see where you are in the work at any moment, and what comes next.</p>
+let currentId = null;
+let currentElement = null;
 
-    <h3 class="doc-h3">Direction</h3>
-    <p class="doc-p">A Direction is where each episode begins. It captures a specific hypothesis about who we are trying to reach, what we want to say to them, and why we believe it will land. Directions are informed assumptions, not final decisions. The rest of the cycle either validates or challenges them. After each episode of learning, new Directions take shape, refined by what the previous cycle revealed. The quality of a Direction shapes everything that follows.</p>
+function selectTrack(id) {
+    currentElement = null;
+    if (currentId === id) {
+        currentId = null;
+        document.querySelectorAll('.track-group').forEach(g => g.classList.remove('dimmed'));
+        document.getElementById('detail').classList.remove('open');
+        return;
+    }
+    currentId = id;
+    document.querySelectorAll('.track-group').forEach(g => {
+        g.classList.toggle('dimmed', g.dataset.id !== id);
+    });
+    renderDetail(TRACKS[id]);
+}
 
-    <h3 class="doc-h3">Develop</h3>
-    <p class="doc-p">A Direction becomes an Interface. We take the hypothesis about what to say, to whom, and through what kind of experience, and translate it into something designed to be encountered. This is where the thinking becomes making: the campaign gets built, the content gets written, the event gets planned. The Direction shapes every creative and executional decision we make, keeping the work coherent from concept through to delivery.</p>
+function selectElement(id) {
+    currentId = null;
+    document.querySelectorAll('.track-group').forEach(g => g.classList.remove('dimmed'));
+    if (currentElement === id) {
+        currentElement = null;
+        document.getElementById('detail').classList.remove('open');
+        return;
+    }
+    currentElement = id;
+    renderDetail(ELEMENTS[id]);
+}
 
-    <h3 class="doc-h3">Interface</h3>
-    <p class="doc-p">An Interface is the form a Direction takes in the world. It could be a campaign, a piece of content, an event, a product communication, or any other channel through which a value idea reaches an audience. Building the Interface is where strategy becomes craft, and where your involvement in the work is often most hands-on. An Interface is not the message itself. It is the vehicle the message travels in, designed to reach a specific person in a specific context.</p>
-
-    <h3 class="doc-h3">Communicate</h3>
-    <p class="doc-p">The Interface reaches its audience. This is the point at which the work enters the world and begins to generate real responses. Communicate covers everything involved in getting the Interface in front of the right people: publication, distribution, activation, amplification. Once an Interface is live, the relationship between your communication and your audience is no longer hypothetical, and the Validation track starts to gather the evidence of how they respond.</p>
-
-    <h3 class="doc-h3">Behavior</h3>
-    <p class="doc-p">A Behavior node captures what audiences actually do in response to an Interface, not what we hoped they would do or what they say they might do. Behavior is the evidence that tests the Direction, and it is the most reliable signal we have about whether the communication is working. Every Behavior node feeds directly into a Learning node, where the full picture gets synthesized before it shapes what comes next.</p>
-
-    <h3 class="doc-h3">Observe &amp; Measure</h3>
-    <p class="doc-p">Once an Interface is live, we watch closely and measure consistently. Observation captures the qualitative dimension: what people say, how they engage, what they ignore. Measurement captures the quantitative dimension: how many, how often, for how long. Together they give us a complete picture of audience behavior rather than a partial one. The pairing of observation and measurement is what makes the Learning at the next node something we can act on with confidence.</p>
-
-    <h3 class="doc-h3">Learning</h3>
-    <p class="doc-p">A Learning node sits at the turning point of each cycle. It brings together everything observed through Validation: what behavior the Interface generated, what that behavior says about the original Direction, and what it implies for what we should do next. Learning is where raw evidence becomes usable knowledge. From here, two things happen at once: new Directions take shape through Discovery, and the evidence flows into Integration to inform what to apply or remove from practice.</p>
-
-    <h3 class="doc-h3">Research &amp; Ideate</h3>
-    <p class="doc-p">Learning flows back into Discovery. We bring together what we observed in the most recent cycle with broader research about audience, context, and market to generate new ideas and sharpen existing assumptions. This is the generative part of the work, where curiosity and evidence meet. The ideas that survive this stage become the Directions for the next episode, and the cycle begins again with more knowledge than it started with.</p>
-
-    <h3 class="doc-h3">Integrate</h3>
-    <p class="doc-p">Learning flows directly into practice. This connection carries the evidence from each cycle into the decisions about what to apply, what to sustain, and what to remove. Integration is not a separate phase that happens at the end of a project. It runs continuously, meaning the practice gets refined with every episode rather than waiting for a major review. The quality of this connection is what separates organizations that build on what they learn from those that simply repeat what they have always done.</p>
-
-    <h3 class="doc-h3">Applied Learning</h3>
-    <p class="doc-p">Applied Learning is where the cycle's evidence becomes practice. Activities that generated the behavior we were looking for get sustained as regular practice. Activities that did not get the results we were looking for get removed or redesigned. There is no carrying forward of things that do not work. What remains after each episode is a communications practice that is more targeted, more consistent, and more grounded in evidence than it was before.</p>
-
-    <h2 class="doc-h2">What We Are Working Toward</h2>
-
-    <p class="doc-p">The goal is not a finished product. It is an organization that communicates more clearly, reaches more of the right people, and builds on what it learns over time. That is the journey we are inviting you into.</p>
-
-    <p class="doc-attribution">A framework by <strong>North Star Communications</strong>.</p>
-
-</article>
-
+function renderDetail(t) {
+    const panel = document.getElementById('detail');
+    panel.innerHTML = `
+        <div class="detail-header">
+            <div class="color-pill" style="background:${t.color}"></div>
+            <div>
+                <h2>${t.label}</h2>
+                <p>${t.subtitle}</p>
+            </div>
+        </div>
+        <div class="detail-body">${t.description}</div>`;
+    panel.classList.remove('open');
+    void panel.offsetWidth;
+    panel.classList.add('open');
+}
+</script>
 </body>
 </html>

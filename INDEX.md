@@ -6,11 +6,15 @@ Canonical sources for each page live in `content/`. Edit `content/` first, regen
 
 ## Pages
 
-- **`home.html`** — marketing landing page. Renders from [`content/web/pages/home/PAGE.md`](../../content/web/pages/home/PAGE.md). Five sections (hero, services, frameworks, work, values, team, contact).
-- **`way-of-work.html`** — long-form Way of Work framework page. Primary entry for the WoW framework from the main nav. Renders from [`content/frameworks/way-of-work/FRAMEWORK.md`](../../content/frameworks/way-of-work/FRAMEWORK.md). Links out to the interactive diagram via a "See it in motion" callout.
-- **`how-we-work.html`** — interactive Way of Work diagram. Clickable four-track cycle with a detail panel. Reached via callout from `way-of-work.html`; nav marks "The Way of Work" active.
-- **`communications-compass.html`** — long-form Communications Compass framework page. Primary entry for the Compass framework from the main nav. Renders from [`content/frameworks/communications-compass/FRAMEWORK.md`](../../content/frameworks/communications-compass/FRAMEWORK.md). Links out to the interactive diagram via a "See it in motion" callout.
-- **`value-communications-compass.html`** — interactive four-armed Communications Compass. Each arm reveals per-service and per-value breakdowns for one stakeholder group. Reached via callout from `communications-compass.html`; nav marks "The Communications Compass" active.
+- **`home.html`** — marketing landing page. Renders from [`content/web/pages/home/PAGE.md`](../../content/web/pages/home/PAGE.md). Hero, services, frameworks, work, values, team, contact.
+- **`quick-start.html`** — Quick Start offer page. Renders from [`content/web/pages/quick-start/PAGE.md`](../../content/web/pages/quick-start/PAGE.md). The primary commercial entry point from the nav.
+- **`way-of-work.html`** — Way of Work framework, single merged page (intro → interactive diagram → outcome). Renders from [`content/frameworks/way-of-work/FRAMEWORK.md`](../../content/frameworks/way-of-work/FRAMEWORK.md). Merged 2026-05-19 from the prior doc-only + interactive split.
+- **`communications-compass.html`** — Communications Compass framework, single merged page (intro → interactive diagram → outcome). Renders from [`content/frameworks/communications-compass/FRAMEWORK.md`](../../content/frameworks/communications-compass/FRAMEWORK.md). Merged 2026-05-19.
+
+## Archived
+
+- **`way-of-work-doc.archived.html`** — the pre-merge doc-only Way of Work page. Preserved for reference; not in nav and not linked.
+- **`communications-compass-doc.archived.html`** — the pre-merge doc-only Compass page. Same status.
 
 ## Adding a new page
 

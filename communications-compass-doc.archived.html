@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Communications Compass · North Star Communications</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,400;0,500;0,800;1,200;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: #F4F1EA;
+            color: #0f172a;
+            font-weight: 400;
+            line-height: 1.65;
+            padding: 2.5rem 1.5rem;
+        }
+
+        /* ---------- Doc container ---------- */
+        .doc-container { max-width: 720px; margin: 0 auto; }
+
+        h1.doc-title {
+            font-weight: 700;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin: 0 0 2rem;
+            color: #0f172a;
+        }
+        h2.doc-h2 {
+            font-weight: 600;
+            font-size: 1.4rem;
+            letter-spacing: -0.01em;
+            margin: 3rem 0 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            color: #0f172a;
+        }
+        h3.doc-h3 {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin: 2.5rem 0 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            color: #0f172a;
+        }
+        h4.doc-h4 {
+            font-weight: 600;
+            font-size: 0.8125rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin: 1.5rem 0 0.5rem;
+            color: #64748b;
+        }
+        .doc-chip {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        p.doc-p {
+            margin: 0 0 1rem;
+            font-size: 1.0625rem;
+            color: #334155;
+        }
+        p.doc-p strong {
+            color: #0f172a;
+            font-weight: 600;
+        }
+        .doc-values-block {
+            margin: 1.5rem 0 0;
+            padding: 1rem 1.25rem;
+            background: #f1f5f9;
+            border-left: 3px solid #cbd5e1;
+            border-radius: 4px;
+        }
+        .doc-values-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #64748b;
+            margin: 0 0 0.5rem;
+        }
+        .doc-values-block p {
+            margin: 0;
+            font-size: 1rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+        .doc-callout {
+            margin: 2rem 0 2.5rem;
+            padding: 1.25rem 1.5rem;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+        .doc-callout-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .doc-callout-link {
+            color: #0f172a;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .doc-callout-link:hover { text-decoration: underline; }
+        .doc-callout-link::after { content: ' →'; color: #64748b; font-weight: 400; }
+        .doc-attribution {
+            margin: 4rem 0 0;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        /* ---------- Main nav ---------- */
+        .site-nav {
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            margin: -2.5rem -1.5rem 2.5rem;
+        }
+        .site-nav-inner {
+            max-width: 1024px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+        .site-nav-brand {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: #0f172a;
+            text-decoration: none;
+        }
+        .site-nav-links {
+            display: flex;
+            gap: 1.25rem;
+        }
+        .site-nav-link {
+            color: #64748b;
+            font-size: 0.875rem;
+            text-decoration: none;
+            font-weight: 500;
+            padding-bottom: 2px;
+            border-bottom: 2px solid transparent;
+        }
+        .site-nav-link:hover { color: #0f172a; }
+        .site-nav-link.active {
+            color: #0f172a;
+            border-bottom-color: #0f172a;
+        }
+        @media (max-width: 580px) {
+            .site-nav { padding: 0.75rem 1rem; margin: -2.5rem -1.5rem 2rem; }
+            .site-nav-inner { gap: 0.75rem; }
+            .site-nav-links { gap: 0.875rem; }
+            .site-nav-link, .site-nav-brand { font-size: 0.8125rem; }
+        }
+    
+        :root {
+            --paper: #F4F1EA;
+            --ink: #0B0B0C;
+            --rule: rgba(0,0,0,0.12);
+            --mute: rgba(0,0,0,0.55);
+        }
+        .grain {
+            position: fixed; inset: 0; pointer-events: none; z-index: 50;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat; background-size: 128px;
+            mix-blend-mode: multiply;
+        }
+        .site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); font-size: 15px; }
+        .site-nav-brand .brand-star { width: 20px; height: 20px; color: var(--ink); display: inline-block; }
+        .site-nav-brand .brand-star svg { width: 100%; height: 100%; display: block; }
+        .site-nav-brand .brand-wm { display: flex; align-items: baseline; gap: 6px; letter-spacing: 0.03em; }
+        .site-nav-brand .brand-name { font-weight: 500; text-transform: uppercase; }
+        .site-nav-brand .brand-slash { font-weight: 300; color: var(--mute); }
+        .site-nav-brand .brand-tag { font-family: 'DM Serif Display', Georgia, serif; font-style: italic; font-weight: 400; font-size: 17px; }
+        h1.doc-title, h2.doc-h2, .page-header h1 {
+            font-family: 'DM Serif Display', Georgia, serif !important;
+            font-weight: 400 !important;
+            letter-spacing: -0.015em !important;
+        }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="star" viewBox="0 0 41 41">
+      <path d="M20.4927 41L17.9311 33.3152C17.1376 30.9282 15.7982 28.7591 14.0195 26.9804C12.2408 25.2017 10.0718 23.8624 7.68476 23.0689L0 20.4927L7.68476 17.9311C10.0718 17.1376 12.2408 15.7982 14.0195 14.0195C15.7982 12.2408 17.1376 10.0718 17.9311 7.68475L20.4927 0L23.0543 7.6994C23.8585 10.0723 25.2025 12.2262 26.9805 13.9915C28.7585 15.7568 30.922 17.0854 33.3006 17.8725L41 20.4341L33.3006 23.0103C30.9136 23.8039 28.7445 25.1432 26.9658 26.9219C25.1871 28.7006 23.8478 30.8697 23.0543 33.2567L20.4927 41ZM9.28026 20.5073C11.8426 21.4693 14.1692 22.9691 16.1032 24.9057C18.0373 26.8423 19.5341 29.1707 20.4927 31.7344C21.4521 29.1688 22.9508 26.839 24.8876 24.9022C26.8244 22.9654 29.1542 21.4667 31.7197 20.5073C29.1561 19.5487 26.8277 18.0519 24.891 16.1179C22.9544 14.1838 21.4547 11.8573 20.4927 9.2949C19.5452 11.8682 18.0527 14.2064 16.1174 16.1492C14.1822 18.0921 11.8499 19.5937 9.28026 20.5512V20.5073Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+<div class="grain" aria-hidden="true"></div>
+
+
+<nav class="site-nav" aria-label="Main">
+    <div class="site-nav-inner">
+        <a href="./home.html" class="site-nav-brand" aria-label="North Star Communications">
+            <span class="brand-star"><svg><use href="#star"/></svg></span>
+            <span class="brand-wm">
+                <span class="brand-name">North&nbsp;Star</span>
+                <span class="brand-slash">/</span>
+                <span class="brand-tag">Communications</span>
+            </span>
+        </a>
+        <div class="site-nav-links">
+            <a href="./home.html" class="site-nav-link">Home</a>
+            <a href="./quick-start.html" class="site-nav-link">Quick Start</a>
+            <a href="./way-of-work.html" class="site-nav-link">The Way of Work</a>
+            <a href="./communications-compass.html" class="site-nav-link active" aria-current="page">The Communications Compass</a>
+        </div>
+    </div>
+</nav>
+
+<article class="doc-container">
+
+    <h1 class="doc-title">The Communications Compass</h1>
+
+    <h2 class="doc-h2">What It Is</h2>
+
+    <p class="doc-p">Every organization is in a constant conversation with four groups of people: the market it wants to attract, the customers it already serves, the employees who carry its values forward every day, and the partners and vendors it depends on to deliver. How well you communicate with each of those groups determines how far your organization can go.</p>
+
+    <p class="doc-p">The Communications Compass is North Star Communications' framework for understanding and serving all four. We sit alongside you as your communications partner, helping you develop the right voice, the right presence, and the right relationships in each direction. Every engagement we take on draws on all five of our services and is guided by all four of our values.</p>
+
+    <div class="doc-callout">
+        <span class="doc-callout-label">See it in motion</span>
+        <a href="./value-communications-compass.html" class="doc-callout-link">Open the interactive Communications Compass</a>
+    </div>
+
+    <h2 class="doc-h2">The Four Points</h2>
+
+    <h3 class="doc-h3"><span class="doc-chip" style="background:#b45309"></span>Market: Potential Customers</h3>
+    <p class="doc-p">Your market is everyone who doesn't know you yet but should. Getting their attention is only part of the work. The harder part is earning their trust quickly enough to turn attention into a real conversation.</p>
+
+    <p class="doc-p"><strong>Brand Works:</strong> Your brand is the first thing potential customers encounter. It needs to earn attention, communicate credibility, and make the case for a first conversation before you've had one.</p>
+    <p class="doc-p"><strong>Community Connect:</strong> Future customers are already gathering in communities. We help you show up genuinely in the spaces where they already are, so your first impression is one of relevance and shared values.</p>
+    <p class="doc-p"><strong>Attention Grab:</strong> The market is noisy. We help you get the right eyes on what you're building and develop the presence and credibility that makes potential customers want to know more.</p>
+    <p class="doc-p"><strong>RevDev:</strong> New revenue starts with new relationships. We help you communicate your value proposition clearly enough that the right people self-select, and your pipeline fills with people who are genuinely ready to engage.</p>
+    <p class="doc-p"><strong>IRL:</strong> Trade shows, industry events, launches, speaking opportunities. The market meets you in person before it meets you online. We help you show up well when it matters most.</p>
+
+    <div class="doc-values-block">
+        <p class="doc-values-label">Our values in practice with the market</p>
+        <p>Human First keeps us grounded in the reality that potential customers respond to people, not polished messaging. Zero Distance drives us to remove every piece of friction between a prospect and a clear understanding of your value. Sustainable Growth keeps us focused on building market presence that compounds rather than campaigns that spike and fade. Resilient Outcomes means we build your communications on real differentiation and consistent delivery, so that your position in the market holds up over time.</p>
+    </div>
+
+    <h3 class="doc-h3"><span class="doc-chip" style="background:#5b21b6"></span>Existing Customers: Your Current Audience</h3>
+    <p class="doc-p">The customers you already have are your most valuable asset and the most undercommunicated-with group in most organizations. Keeping them engaged, informed, and genuinely connected to your brand is what turns a customer base into a community.</p>
+
+    <p class="doc-p"><strong>Brand Works:</strong> Existing customers need to feel confident in their continued relationship with you. We keep your brand current and relevant so that the choice to stay feels like the right one.</p>
+    <p class="doc-p"><strong>Community Connect:</strong> Customers who feel like they belong to something don't just renew, they advocate. We help you build a genuine community around your brand and values.</p>
+    <p class="doc-p"><strong>Attention Grab:</strong> Re-engagement, upsell, and loyalty campaigns require just as much craft as acquisition. We help you maintain meaningful presence with the customers you already have.</p>
+    <p class="doc-p"><strong>RevDev:</strong> Sustainable revenue is built on retention and expansion, not just acquisition. Your existing customers are the foundation of your revenue stream, and we treat their communications accordingly.</p>
+    <p class="doc-p"><strong>IRL:</strong> Customer events, briefings, and in-person touchpoints deepen relationships beyond the transactional. We help you create the moments that make customers feel genuinely valued.</p>
+
+    <div class="doc-values-block">
+        <p class="doc-values-label">Our values in practice with existing customers</p>
+        <p>Human First means we make sure your communications feel like they come from people who actually know and care about the customer, not from an automated retention workflow. Zero Distance drives us to reduce the friction in every customer interaction so the relationship stays strong. Sustainable Growth keeps us focused on building the communication cadence that grows customer lifetime value over time. Resilient Outcomes means we help you build the trust that makes recovery possible when things inevitably go wrong.</p>
+    </div>
+
+    <h3 class="doc-h3"><span class="doc-chip" style="background:#065f46"></span>Employees: Your Internal Community</h3>
+    <p class="doc-p">Your employees are the most important audience for your communications and usually the most overlooked. They carry your values into the world every day. How you communicate with them shapes how they communicate on your behalf.</p>
+
+    <p class="doc-p"><strong>Brand Works:</strong> Your people are the most important audience for your brand. If your team doesn't believe in or understand it, nobody else will. We make sure your brand resonates from the inside out.</p>
+    <p class="doc-p"><strong>Community Connect:</strong> Culture is a communications outcome. We help you build the internal community and shared identity that makes your organization a place people want to stay and grow in.</p>
+    <p class="doc-p"><strong>Attention Grab:</strong> Internal visibility matters as much as external. Initiatives, wins, and strategic direction need to land with your team just as powerfully as they do with the market.</p>
+    <p class="doc-p"><strong>RevDev:</strong> When employees understand how their work connects to the organization's growth, they're more engaged and more invested in outcomes. We help you make that connection clear.</p>
+    <p class="doc-p"><strong>IRL:</strong> The moments that shape culture happen in person. We help you design and run the gatherings, offsites, and events that bring your team together around shared purpose.</p>
+
+    <div class="doc-values-block">
+        <p class="doc-values-label">Our values in practice with employees</p>
+        <p>Human First means we treat internal communications with the same care and craft as external ones, because your team deserves to be spoken to like the people they are. Zero Distance drives us to close the gap between leadership intent and team understanding, so the whole organization can move together. Sustainable Growth keeps us focused on the communications infrastructure that supports long-term retention and engagement. Resilient Outcomes means we help your team build the trust in leadership that makes adaptation possible when circumstances change.</p>
+    </div>
+
+    <h3 class="doc-h3"><span class="doc-chip" style="background:#1e3a8a"></span>Partners &amp; Vendors: Your Value Providers</h3>
+    <p class="doc-p">The organizations and people you work with to deliver your services are a critical part of your communications ecosystem. How you show up to them determines the quality of the support you receive and the strength of the relationships you can build over time.</p>
+
+    <p class="doc-p"><strong>Brand Works:</strong> Partners decide who to work with based on how credible and professional you appear. We make sure your brand communicates the right signals before the first conversation even happens.</p>
+    <p class="doc-p"><strong>Community Connect:</strong> The best partnerships are built on shared values and genuine relationships, not just contracts. We help you find your place in partner ecosystems and show up consistently within them.</p>
+    <p class="doc-p"><strong>Attention Grab:</strong> The vendors and collaborators you want to work with have choices. We help you become visible and attractive to the right partners in the spaces where they're paying attention.</p>
+    <p class="doc-p"><strong>RevDev:</strong> Partnerships are a revenue channel. We help you structure and communicate your value proposition so that partner relationships convert into sustainable, mutually beneficial arrangements.</p>
+    <p class="doc-p"><strong>IRL:</strong> The partnerships that last are built in person. We help you create and maximize the moments where real connection happens, because no partnership survives on email alone.</p>
+
+    <div class="doc-values-block">
+        <p class="doc-values-label">Our values in practice with partners and vendors</p>
+        <p>Human First keeps us focused on the reality that partner relationships are built between people, not between brands. Zero Distance drives us to close the gap between what you offer and what your partners understand you to offer, so every collaboration starts from a place of genuine alignment. Sustainable Growth keeps us focused on building a partner ecosystem that compounds over time. Resilient Outcomes means we help you communicate with partners in a way that builds the kind of trust that holds up when things get complicated.</p>
+    </div>
+
+    <h2 class="doc-h2">Our Values</h2>
+
+    <p class="doc-p">Every engagement, in every direction, is guided by the same four commitments.</p>
+
+    <p class="doc-p"><strong>Human First:</strong> Technology does a lot of things well, but it's never been great at replacing people. We keep the human connection at the center of everything we do and treat technology as what it should be: a tool that brings people closer together, not a substitute for real relationship.</p>
+
+    <p class="doc-p"><strong>Zero Distance:</strong> The best communications disappear. When the connection between you and the people you serve feels seamless, with no friction and no noise, just value flowing in both directions, that's what we're working toward. It's an ideal we'll never fully reach, and that's exactly what keeps us sharp.</p>
+
+    <p class="doc-p"><strong>Sustainable Growth:</strong> Fast isn't the same as healthy, and we've seen enough organizations burn through momentum to know the difference. We help you build growth that matches your capacity, compounds over time, and feeds itself rather than depleting what got you here.</p>
+
+    <p class="doc-p"><strong>Resilient Outcomes:</strong> Markets shift and plans change, and the work we do together is designed to hold up when they do. We measure what's working, learn from what isn't, and fold those insights into the next stage of the work so that every outcome makes the next one stronger.</p>
+
+    <p class="doc-attribution">A framework by <strong>North Star Communications</strong>.</p>
+
+</article>
+
+</body>
+</html>
