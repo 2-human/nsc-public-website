@@ -264,7 +264,10 @@
           D1=250  I1=325  B1=400  L1=475  D2=550
                           I2=625  B2=700  L2=775  D3=850
 
-        Integration nodes directly below L1 and L2: x=475 and x=775, y=410
+        Integration nodes: x=550 and x=850, y=410 (Value Increment)
+        Integrate arrows: straight vertical from Discovery K+A nodes
+        (D2=550,80 and D3=850,80) down to the Integration nodes at the
+        same x. Each cycle's new knowledge is what becomes the value increment.
         ═══════════════════════════════════════════════════════════════
         -->
         <svg id="diagram" viewBox="0 0 980 470" xmlns="http://www.w3.org/2000/svg">
@@ -428,19 +431,19 @@
                     stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.2" stroke-dasharray="5,4"/>
                 <polygon points="968,410 961,406 961,414" fill="#7c3aed" opacity="0.25"/>
 
-                <!-- Applied Learning node (directly below L1) -->
+                <!-- Applied Learning node (directly below Discovery K+A D2) -->
                 <g class="node-group" onclick="selectElement('applied_learning')">
-                    <circle cx="475" cy="410" r="22" fill="transparent"/>
-                    <circle cx="475" cy="410" r="12" fill="#7c3aed" stroke="white" stroke-width="2.5"/>
-                    <text x="475" y="433" text-anchor="middle"
+                    <circle cx="550" cy="410" r="22" fill="transparent"/>
+                    <circle cx="550" cy="410" r="12" fill="#7c3aed" stroke="white" stroke-width="2.5"/>
+                    <text x="550" y="433" text-anchor="middle"
                         font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
                         fill="#7c3aed">Value Increment</text>
                 </g>
-                <!-- Applied Learning node (directly below L2) -->
+                <!-- Applied Learning node (directly below Discovery K+A D3) -->
                 <g class="node-group" onclick="selectElement('applied_learning')">
-                    <circle cx="775" cy="410" r="22" fill="transparent"/>
-                    <circle cx="775" cy="410" r="12" fill="#7c3aed" stroke="white" stroke-width="2.5"/>
-                    <text x="775" y="433" text-anchor="middle"
+                    <circle cx="850" cy="410" r="22" fill="transparent"/>
+                    <circle cx="850" cy="410" r="12" fill="#7c3aed" stroke="white" stroke-width="2.5"/>
+                    <text x="850" y="433" text-anchor="middle"
                         font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600"
                         fill="#7c3aed">Value Increment</text>
                 </g>
@@ -543,27 +546,27 @@
 
             <!-- ── INTEGRATE (vertical from L1) ──────────── -->
 
-            <!-- Learning1(475,190) → AppliedLearning(475,410)   "Integrate" -->
+            <!-- Knowledge+Assumptions D2(550,80) → Value Increment(550,410)   "Integrate" -->
             <g class="arrow-group" onclick="selectElement('integrate')">
-                <line x1="475" y1="202" x2="475" y2="398" stroke="transparent" stroke-width="18"/>
-                <line x1="475" y1="202" x2="475" y2="398"
+                <line x1="550" y1="92" x2="550" y2="398" stroke="transparent" stroke-width="18"/>
+                <line x1="550" y1="92" x2="550" y2="398"
                     stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.55" stroke-dasharray="5,3"
                     marker-end="url(#arr-purple)"/>
-                <rect x="415" y="292" width="52" height="16" rx="4" fill="white" opacity="0.93"/>
-                <text x="441" y="304" text-anchor="middle"
+                <rect x="524" y="237" width="52" height="16" rx="4" fill="white" opacity="0.93"/>
+                <text x="550" y="249" text-anchor="middle"
                     font-family="Inter, system-ui, sans-serif" font-size="9" fill="#7c3aed" font-weight="600">Integrate</text>
             </g>
 
-            <!-- ── INTEGRATE (vertical from L2) ──────────── -->
+            <!-- ── INTEGRATE (vertical from D3) ──────────── -->
 
-            <!-- Learning2(775,190) → AppliedLearning(775,410)   "Integrate" -->
+            <!-- Knowledge+Assumptions D3(850,80) → Value Increment(850,410)   "Integrate" -->
             <g class="arrow-group" onclick="selectElement('integrate')">
-                <line x1="775" y1="202" x2="775" y2="398" stroke="transparent" stroke-width="18"/>
-                <line x1="775" y1="202" x2="775" y2="398"
+                <line x1="850" y1="92" x2="850" y2="398" stroke="transparent" stroke-width="18"/>
+                <line x1="850" y1="92" x2="850" y2="398"
                     stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.55" stroke-dasharray="5,3"
                     marker-end="url(#arr-purple)"/>
-                <rect x="715" y="292" width="52" height="16" rx="4" fill="white" opacity="0.93"/>
-                <text x="741" y="304" text-anchor="middle"
+                <rect x="824" y="237" width="52" height="16" rx="4" fill="white" opacity="0.93"/>
+                <text x="850" y="249" text-anchor="middle"
                     font-family="Inter, system-ui, sans-serif" font-size="9" fill="#7c3aed" font-weight="600">Integrate</text>
             </g>
 
@@ -661,9 +664,9 @@ const ELEMENTS = {
     },
     integrate: {
         label: 'Integrate',
-        subtitle: 'Interface \u2192 Value Increment',
+        subtitle: 'Knowledge + Assumptions \u2192 Value Increment',
         color: '#7c3aed',
-        description: 'Integrate carries each cycle\'s learning into practice. It is the connection that takes what we have proven and folds it into the organization\'s value stream \u2014 its processes, its services, its products. Integration is not a separate phase that happens at the end of a project. It runs continuously, so the way you operate is refined with every cycle rather than waiting for a major review. The quality of this connection is what separates organizations that build on what they learn from those that simply repeat what they have always done.'
+        description: 'Integrate carries each cycle\'s new knowledge into practice. What the cycle proved becomes a value increment, folded into the organization\'s value stream: its processes, its services, its products. The knowledge that shows up at the start of the next cycle is the same knowledge that just got built into the way you operate, so learning and delivery advance together. Integration runs continuously rather than as a separate phase, and the strength of this connection is what separates organizations that build on what they learn from those that simply repeat what they have always done.'
     }
 };
 
