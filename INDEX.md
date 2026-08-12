@@ -1,6 +1,6 @@
 # public/website/
 
-Rendered HTML pages for the North Star Communications website. This folder mirrors verbatim to `tnosugar/nsc-public-website` via the workflow at `.github/workflows/sync-public.yml`. Pages serve at `https://tnosugar.github.io/nsc-public-website/<filename>.html` (or at the configured CNAME, when one is set).
+Rendered HTML pages for the North Star Communications website. This folder mirrors verbatim to `2-human/nsc-public-website` via the workflow at `.github/workflows/sync-public.yml`. Pages serve at `https://2-human.github.io/nsc-public-website/<filename>.html` (or at the configured CNAME, when one is set).
 
 Canonical sources for each page live in `content/`. Edit `content/` first, regenerate the HTML, commit both. Do not edit these HTML files directly without an entry in the corresponding `content/` doc.
 
