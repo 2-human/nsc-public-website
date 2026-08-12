@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Communications Compass · North Star Communications</title>
+    <title>The Compass · North Star Communications</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,400;0,500;0,800;1,200;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
@@ -175,6 +175,12 @@
             margin-bottom: 1rem;
         }
 
+        .detail-planning {
+            margin-top: 2rem;
+            padding-top: 1.4rem;
+            border-top: 2px solid rgba(0,0,0,0.12);
+        }
+
         .item { margin-bottom: 1.1rem; }
         .item:last-child { margin-bottom: 0; }
 
@@ -292,16 +298,16 @@
             <a href="./home.html" class="site-nav-link">Home</a>
             <a href="./quick-start.html" class="site-nav-link">Quick Start</a>
             <a href="./way-of-work.html" class="site-nav-link">The Way of Work</a>
-            <a href="./communications-compass.html" class="site-nav-link active" aria-current="page">The Communications Compass</a>
+            <a href="./communications-compass.html" class="site-nav-link active" aria-current="page">The Compass</a>
         </div>
     </div>
 </nav>
 <div class="wrapper">
 
     <section class="intro">
-        <div class="intro__eyebrow">The Communications Compass</div>
+        <div class="intro__eyebrow">The Compass</div>
         <h1 class="intro__title">Four conversations, <em>one organization</em>.</h1>
-        <p class="intro__body">Every organization is in constant conversation with four groups of people: the market it wants to attract, the customers it already serves, the team that carries its values into the world every day, and the partners and vendors it depends on. The Communications Compass is how we help you serve all four well, drawing on each of our five services and guided by our four values.</p>
+        <p class="intro__body">Every organization is in constant conversation with four groups of people: the market it wants to attract, the customers it already serves, the team that carries its values into the world every day, and the partners and vendors it depends on. The Compass maps all four, 360 degrees around you, and plans what each cycle of work will take: which of our four instruments it draws on, who needs to be in the room, and how long the feedback takes to come back.</p>
     </section>
 
     <div class="compass-stage">
@@ -391,13 +397,13 @@ const STAKEHOLDERS = {
         label: 'Market',
         subtitle: 'Potential Customers',
         color: '#b45309',
-        services: [
-            { name: 'Brand Works', text: "Your brand is the first thing potential customers encounter. It needs to earn attention, communicate credibility, and make the case for a first conversation before you've had one." },
-            { name: 'Community Connect', text: "Future customers are already gathering in communities. We help you show up genuinely in the spaces where they already are, so your first impression is one of relevance and shared values." },
-            { name: 'Attention Grab', text: "The market is noisy. We help you get the right eyes on what you're building and develop the presence and credibility that makes potential customers want to know more." },
-            { name: 'RevDev', text: "New revenue starts with new relationships. We help you communicate your value proposition clearly enough that the right people self-select, and your pipeline fills with people who are genuinely ready to engage." },
-            { name: 'IRL', text: "Trade shows, industry events, launches, speaking opportunities. The market meets you in person before it meets you online. We help you show up well when it matters most." }
+        instruments: [
+            { name: 'Brand', text: "Your brand is the first thing the market encounters, and often the only thing it has to judge you on. It has to earn attention and communicate credibility before you have had a single conversation." },
+            { name: 'Product', text: "The market judges the promise of your product long before it uses one. We work on how the product is framed, packaged, and demonstrated, so that what people expect going in is what they actually get." },
+            { name: 'Communications', text: "The market is noisy. We build the presence and the flows that get the right people paying attention, and that carry their earliest signals back to you while they are still cheap to act on." },
+            { name: 'Revenue', text: "New revenue starts with new relationships. We make your value proposition clear enough that the right people self-select, so your pipeline fills with people who are genuinely ready to engage." }
         ],
+        planning: "The most resource-hungry direction on the Compass, because you are buying attention rather than borrowing it. Expect the work to lean on Brand and Communications first, and to need someone who can commit to a position rather than hedge it. Cycles run longer here, because the feedback has to travel back from people who owe you nothing.",
         values: [
             { name: 'Human First', text: "Potential customers respond to people, not polished messaging. The more human your outreach, the more likely it cuts through." },
             { name: 'Zero Distance', text: "Every piece of friction between a potential customer and a clear understanding of your value is a lost opportunity. We work to remove it." },
@@ -409,13 +415,13 @@ const STAKEHOLDERS = {
         label: 'Existing Customers',
         subtitle: 'Your Current Audience',
         color: '#5b21b6',
-        services: [
-            { name: 'Brand Works', text: "Existing customers need to feel confident in their continued relationship with you. We keep your brand current and relevant so that the choice to stay feels like the right one." },
-            { name: 'Community Connect', text: "Customers who feel like they belong to something don't just renew, they advocate. We help you build a genuine community around your brand and values." },
-            { name: 'Attention Grab', text: "Re-engagement, upsell, and loyalty campaigns require just as much craft as acquisition. We help you maintain meaningful presence with the customers you already have." },
-            { name: 'RevDev', text: "Sustainable revenue is built on retention and expansion, not just acquisition. Your existing customers are the foundation of your revenue stream, and we treat their communications accordingly." },
-            { name: 'IRL', text: "Customer events, briefings, and in-person touchpoints deepen relationships beyond the transactional. We help you create the moments that make customers feel genuinely valued." }
+        instruments: [
+            { name: 'Brand', text: "Existing customers need the choice to stay to keep feeling like the right one. We keep your brand current and relevant so that staying is a decision they make rather than an inertia they drift in." },
+            { name: 'Product', text: "Your customers meet your value through the product every day, which makes them the most reliable source of truth you have about it. We build the routes that carry what they do with it back to the people who decide what it becomes." },
+            { name: 'Communications', text: "Retention, re-engagement, and expansion take the same craft as acquisition. We keep the flows open so your customers hear from you between the invoices." },
+            { name: 'Revenue', text: "Sustainable revenue is built on retention and expansion, not on acquisition alone. The customers you already have are the foundation of your revenue stream, and we treat them accordingly." }
         ],
+        planning: "Usually the least expensive direction to run a cycle in, because the audience is reachable and already paying attention. It needs your customer-facing people in the room, in support, success, or account management, because they are holding the knowledge and the assumptions worth testing. The constraint here is rarely budget. It is whether you are willing to act on what comes back.",
         values: [
             { name: 'Human First', text: "Long-term customer relationships are personal relationships. We make sure your communications feel like they come from people who actually know and care about the customer." },
             { name: 'Zero Distance', text: "The less friction in your ongoing customer communications, the stronger the relationship and the higher the lifetime value." },
@@ -427,13 +433,13 @@ const STAKEHOLDERS = {
         label: 'Employees',
         subtitle: 'Your Internal Community',
         color: '#065f46',
-        services: [
-            { name: 'Brand Works', text: "Your people are the most important audience for your brand. If your team doesn't believe in or understand it, nobody else will. We make sure your brand resonates from the inside out." },
-            { name: 'Community Connect', text: "Culture is a communications outcome. We help you build the internal community and shared identity that makes your organization a place people want to stay and grow in." },
-            { name: 'Attention Grab', text: "Internal visibility matters as much as external. Initiatives, wins, and strategic direction need to land with your team just as powerfully as they do with the market." },
-            { name: 'RevDev', text: "When employees understand how their work connects to the organization's growth, they're more engaged and more invested in outcomes. We help you make that connection clear." },
-            { name: 'IRL', text: "The moments that shape culture happen in person. We help you design and run the gatherings, offsites, and events that bring your team together around shared purpose." }
+        instruments: [
+            { name: 'Brand', text: "Your people are the most important audience for your brand. If your team doesn't believe in it or understand it, nobody else will. We make sure it resonates from the inside out." },
+            { name: 'Product', text: "The people who build and deliver your product hold assumptions about its value that nobody has ever tested. Surfacing those is often the shortest route to a real improvement." },
+            { name: 'Communications', text: "Internal flows decide whether leadership intent survives the trip to the team. We close that gap, so the whole organization can move together rather than in pieces." },
+            { name: 'Revenue', text: "When people understand how their work connects to how the organization earns, they make better decisions without having to be told which ones to make." }
         ],
+        planning: "Cheap in money, expensive in trust. Leadership has to be genuinely in the room, because a cycle here that produces no visible change costs you more than never having run it. Plan the follow-through before you plan the listening.",
         values: [
             { name: 'Human First', text: "Your employees aren't an audience to be managed. They're the people who carry your values into the world every day. We treat every piece of internal communications accordingly." },
             { name: 'Zero Distance', text: "The less distance between leadership intent and team understanding, the more effectively your organization can execute together." },
@@ -445,13 +451,13 @@ const STAKEHOLDERS = {
         label: 'Partners & Vendors',
         subtitle: 'Your Value Providers',
         color: '#1e3a8a',
-        services: [
-            { name: 'Brand Works', text: "Partners decide who to work with based on how credible and professional you appear. We make sure your brand communicates the right signals before the first conversation even happens." },
-            { name: 'Community Connect', text: "The best partnerships are built on shared values and genuine relationships, not just contracts. We help you find your place in partner ecosystems and show up consistently within them." },
-            { name: 'Attention Grab', text: "The vendors and collaborators you want to work with have choices. We help you become visible and attractive to the right partners in the spaces where they're paying attention." },
-            { name: 'RevDev', text: "Partnerships are a revenue channel. We help you structure and communicate your value proposition so that partner relationships convert into sustainable, mutually beneficial arrangements." },
-            { name: 'IRL', text: "The partnerships that last are built in person. We help you create and maximize the moments where real connection happens, because no partnership survives on email alone." }
+        instruments: [
+            { name: 'Brand', text: "Partners decide who to work with based on how credible and professional you appear, usually before the first conversation. Your brand does that work in advance, whether you have shaped it or not." },
+            { name: 'Product', text: "What your partners build, supply, or integrate with becomes part of what your customer finally experiences. The seams between you are where value leaks out." },
+            { name: 'Communications', text: "The gap between what you offer and what a partner understands you to offer is where most collaborations quietly fail. We close it, so every arrangement starts from genuine alignment." },
+            { name: 'Revenue', text: "Partnerships are a revenue channel. We help you structure and communicate your value proposition so that partner relationships convert into sustainable, mutually beneficial arrangements." }
         ],
+        planning: "The smallest audience on the Compass and the longest feedback loop, because partner relationships move at the speed of contracts. Involve whoever owns the commercial relationship from the start, and plan in quarters rather than weeks.",
         values: [
             { name: 'Human First', text: "Partner relationships are built on trust between people, not between brands. We keep that at the center of every communications strategy we build." },
             { name: 'Zero Distance', text: "We work to close the gap between what you offer and what your partners understand you to offer, so every collaboration starts from a place of genuine alignment." },
@@ -485,7 +491,7 @@ function renderDetail(id) {
     const s = STAKEHOLDERS[id];
     const panel = document.getElementById('detail');
 
-    const servicesHTML = s.services.map(i => `
+    const instrumentsHTML = s.instruments.map(i => `
         <div class="item">
             <div class="item-name">${i.name}</div>
             <div class="item-text">${i.text}</div>
@@ -507,13 +513,17 @@ function renderDetail(id) {
         </div>
         <div class="detail-grid">
             <div>
-                <div class="col-label">What We Do</div>
-                ${servicesHTML}
+                <div class="col-label">Instruments</div>
+                ${instrumentsHTML}
             </div>
             <div>
                 <div class="col-label">Our Values in Practice</div>
                 ${valuesHTML}
             </div>
+        </div>
+        <div class="detail-planning" style="border-color:${s.color}33">
+            <div class="col-label">Planning the Cycle</div>
+            <div class="item-text">${s.planning}</div>
         </div>`;
 
     panel.classList.remove('open');

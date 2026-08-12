@@ -15,6 +15,8 @@
       --ink: #0B0B0C;
       --rule: rgba(0,0,0,0.12);
       --mute: rgba(0,0,0,0.55);
+      --wow: #0369a1;
+      --compass: #1e3a8a;
     }
 
     body {
@@ -41,7 +43,7 @@
     }
 
     /* ---------- Hero ---------- */
-    .hero { text-align: center; padding: 56px 0 72px; }
+    .hero { text-align: center; padding: 56px 0 80px; }
 
     .logo-mark {
       width: 64px;
@@ -58,32 +60,38 @@
       font-weight: 400;
       letter-spacing: -0.02em;
       line-height: 1.02;
-      margin-bottom: 24px;
+      margin-bottom: 64px;
       color: var(--ink);
     }
     .hero h1 em { font-style: italic; font-weight: 400; }
 
-    .hero .subhead {
-      font-size: clamp(18px, 1.4vw, 22px);
-      font-weight: 200;
-      line-height: 1.45;
-      letter-spacing: -0.005em;
-      color: var(--ink);
-      max-width: 620px;
+    .hero-opening {
+      max-width: 660px;
       margin: 0 auto;
+      text-align: left;
     }
 
-    .hero-visual {
-      margin: 56px auto 0;
-      max-width: 720px;
-      display: flex; align-items: center; justify-content: center;
+    .hero-lead {
+      font-size: clamp(17px, 1.3vw, 20px);
+      font-weight: 200;
+      line-height: 1.5;
       color: var(--ink);
+      margin-bottom: 20px;
     }
-    .hero-visual svg { width: 100%; max-width: 560px; height: auto; display: block; opacity: 0.9; }
+
+    .the-question {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(30px, 4.2vw, 52px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
 
     /* ---------- Sections ---------- */
     section { padding: 72px 0; border-top: 1px solid var(--rule); }
-    section:first-of-type { border-top: none; }
 
     .section-label {
       font-size: 12px;
@@ -92,45 +100,93 @@
       color: rgba(0,0,0,0.4);
       font-weight: 500;
       margin-bottom: 12px;
+      font-variant-numeric: tabular-nums;
     }
 
     h2 {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(40px, 6vw, 96px);
+      font-size: clamp(40px, 6vw, 88px);
       font-weight: 400;
       letter-spacing: -0.015em;
       line-height: 1.02;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
       color: var(--ink);
       max-width: 18ch;
     }
     h2 em { font-style: italic; font-weight: 400; }
 
-    .section-intro {
-      font-size: clamp(16px, 1.2vw, 19px);
-      font-weight: 200;
-      line-height: 1.5;
-      color: rgba(0,0,0,0.6);
-      max-width: 720px;
-      margin-bottom: 48px;
+    /* ---------- Prose ---------- */
+    .prose p {
+      font-size: clamp(16px, 1.2vw, 18px);
+      line-height: 1.7;
+      color: rgba(0,0,0,0.75);
+      max-width: 680px;
+      margin-bottom: 20px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+
+    .symptom-list {
+      list-style: none;
+      max-width: 680px;
+      margin: 8px 0 28px;
+      padding-left: 0;
+    }
+    .symptom-list li {
+      font-size: clamp(16px, 1.2vw, 18px);
+      line-height: 1.6;
+      color: rgba(0,0,0,0.75);
+      padding: 14px 0 14px 28px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .symptom-list li:first-child { border-top: 1px solid var(--rule); }
+    .symptom-list li::before {
+      content: "";
+      position: absolute;
+      left: 4px; top: 25px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.35);
     }
 
-    /* ---------- What We Do (matches Quick Start cap pattern) ---------- */
-    .services { display: flex; flex-direction: column; }
+    /* ---------- Framework link ---------- */
+    .framework-link {
+      display: inline-block;
+      margin-top: 28px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid currentColor;
+    }
+    .framework-link.wow { color: var(--wow); }
+    .framework-link.compass { color: var(--compass); }
 
-    .service {
+    section.framework .section-label.wow { color: var(--wow); }
+    section.framework .section-label.compass { color: var(--compass); }
+
+    .bridge {
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ---------- Instruments ---------- */
+    .instruments { display: flex; flex-direction: column; margin-top: 8px; }
+
+    .instrument {
       display: grid;
       grid-template-columns: 60px 1fr 2fr;
       gap: clamp(20px, 3vw, 48px);
       align-items: baseline;
-      padding: clamp(24px, 3vw, 40px) 0;
+      padding: clamp(24px, 3vw, 36px) 0;
       border-bottom: 1px solid var(--rule);
       transition: padding 0.5s cubic-bezier(0.19,1,0.22,1);
     }
-    .service:hover { padding-left: 16px; }
-    .service:last-child { border-bottom: none; }
+    .instrument:hover { padding-left: 16px; }
+    .instrument:last-child { border-bottom: none; }
 
-    .service-num {
+    .instrument-num {
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.16em;
@@ -138,158 +194,45 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .service-name {
+    .instrument-name {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(24px, 2.6vw, 44px);
+      font-size: clamp(26px, 2.8vw, 46px);
       font-weight: 400;
       letter-spacing: -0.01em;
       line-height: 1.02;
       color: var(--ink);
-      white-space: nowrap;
       transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);
     }
-    .service:hover .service-name { transform: translateX(6px); }
+    .instrument:hover .instrument-name { transform: translateX(6px); }
 
-    .service-body {
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .service-tagline {
+    .instrument-body { display: flex; flex-direction: column; gap: 6px; }
+    .instrument-tagline {
       font-size: clamp(15px, 1.1vw, 17px);
       color: var(--ink);
       line-height: 1.45;
     }
-    .service-expansion {
+    .instrument-expansion {
       font-size: 14.5px;
       color: var(--mute);
-      line-height: 1.55;
-      max-width: 52ch;
+      line-height: 1.6;
+      max-width: 54ch;
     }
 
     @media (max-width: 720px) {
-      .service {
-        grid-template-columns: 40px 1fr;
-        gap: 14px;
-      }
-      .service-body { grid-column: 2; margin-top: 4px; }
+      .instrument { grid-template-columns: 40px 1fr; gap: 14px; }
+      .instrument-body { grid-column: 2; margin-top: 4px; }
     }
-
-    .compass-link {
-      display: inline-block;
-      margin-top: 32px;
-      font-size: 15px;
-      color: rgba(0,0,0,0.6);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(0,0,0,0.2);
-      padding-bottom: 1px;
-    }
-    .compass-link:hover { color: var(--ink); border-bottom-color: var(--mute); }
-
-    /* ---------- How We Work ---------- */
-    .framework-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 8px;
-    }
-
-    .framework-card {
-      background: #fff;
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .framework-card .label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    .framework-card.compass .label { color: #1e3a8a; }
-    .framework-card.wow .label { color: #0369a1; }
-
-    .framework-card h3 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(24px, 2.6vw, 32px);
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      line-height: 1.05;
-      margin-bottom: 14px;
-      color: var(--ink);
-    }
-
-    .framework-card p {
-      font-size: 15px;
-      color: rgba(0,0,0,0.6);
-      margin-bottom: 24px;
-      flex-grow: 1;
-    }
-
-    .framework-card .explore {
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      align-self: flex-start;
-      padding-bottom: 2px;
-      border-bottom: 1px solid currentColor;
-    }
-    .framework-card.compass .explore { color: #1e3a8a; }
-    .framework-card.wow .explore { color: #0369a1; }
-
-    /* ---------- What We've Done ---------- */
-    .work-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .work-category {
-      padding: 24px 0;
-      border-top: 1px solid var(--rule);
-    }
-
-    .work-category h3 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: rgba(0,0,0,0.7);
-      font-weight: 600;
-      margin-bottom: 14px;
-    }
-
-    .work-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-
-    .work-item {
-      font-size: 15px;
-      color: var(--ink);
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .work-client {
-      font-weight: 500;
-    }
-
-    .work-outcome {
-      font-size: 14px;
-      color: var(--mute);
-    }
-
-    .work-outcome.tbd { color: rgba(0,0,0,0.4); font-style: italic; }
 
     /* ---------- Values ---------- */
     .values-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      gap: 20px;
+      margin-top: 8px;
     }
 
     .value {
-      padding: 28px;
+      padding: 26px;
       background: #fff;
       border: 1px solid var(--rule);
       border-radius: 12px;
@@ -297,68 +240,114 @@
 
     .value h3 {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(22px, 2vw, 28px);
+      font-size: clamp(21px, 2vw, 27px);
       font-weight: 400;
       letter-spacing: -0.01em;
       line-height: 1.05;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       color: var(--ink);
     }
 
     .value p {
       font-size: 14.5px;
-      color: rgba(0,0,0,0.6);
+      color: rgba(0,0,0,0.62);
       line-height: 1.65;
+    }
+
+    /* ---------- Experience ---------- */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 40px;
+    }
+
+    .industry {
+      padding: 24px 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .industry h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(0,0,0,0.7);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .industry ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .industry li {
+      font-size: 15px;
+      color: var(--mute);
+      line-height: 1.55;
     }
 
     /* ---------- Team ---------- */
     .team-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
     }
 
-    .member {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+    .member { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
 
     .member-photo {
-      width: 96px;
-      height: 96px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       background: var(--rule);
       display: flex; align-items: center; justify-content: center;
       color: var(--mute);
       font-weight: 500;
-      font-size: 28px;
+      font-size: 26px;
     }
 
     .member-photo.placeholder {
       border: 1.5px dashed rgba(0,0,0,0.2);
       background: transparent;
-      font-size: 12px;
-      color: rgba(0,0,0,0.4);
-      font-style: italic;
+      color: rgba(0,0,0,0.35);
     }
 
     .member-name {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(22px, 2vw, 28px);
+      font-size: clamp(20px, 2vw, 26px);
       font-weight: 400;
       letter-spacing: -0.01em;
       line-height: 1.05;
       color: var(--ink);
     }
+    .member-name.placeholder { color: rgba(0,0,0,0.35); font-style: italic; }
 
-    .member-bio {
-      font-size: 14.5px;
-      color: rgba(0,0,0,0.6);
-      line-height: 1.65;
+    /* ---------- Partner network ---------- */
+    .partner-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
     }
 
-    .member-bio.placeholder { color: rgba(0,0,0,0.4); font-style: italic; }
+    .partner {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .partner h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(20px, 2vw, 25px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .partner p {
+      font-size: 14.5px;
+      color: rgba(0,0,0,0.6);
+      line-height: 1.55;
+    }
 
     /* ---------- Contact ---------- */
     .connect-intro {
@@ -366,17 +355,12 @@
       color: rgba(0,0,0,0.6);
       margin-bottom: 40px;
       max-width: 680px;
+      line-height: 1.7;
     }
 
-    .form {
-      max-width: 680px;
-    }
+    .form { max-width: 680px; }
 
-    .form-subhead {
-      font-size: 15px;
-      color: var(--mute);
-      margin-bottom: 20px;
-    }
+    .form-subhead { font-size: 15px; color: var(--mute); margin-bottom: 20px; }
 
     .form textarea {
       width: 100%;
@@ -392,18 +376,9 @@
     }
 
     .form textarea::placeholder { color: rgba(0,0,0,0.4); }
+    .form textarea:focus { outline: none; border-color: var(--mute); }
 
-    .form textarea:focus {
-      outline: none;
-      border-color: var(--mute);
-    }
-
-    .form-action {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 16px;
-    }
+    .form-action { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
 
     .form button {
       background: var(--ink);
@@ -418,11 +393,7 @@
       opacity: 0.5;
     }
 
-    .form-note {
-      font-size: 13px;
-      color: rgba(0,0,0,0.4);
-      font-style: italic;
-    }
+    .form-note { font-size: 13px; color: rgba(0,0,0,0.4); font-style: italic; }
 
     /* ---------- Footer ---------- */
     footer {
@@ -432,11 +403,7 @@
       text-align: center;
     }
 
-    .attribution {
-      font-size: 13px;
-      color: var(--mute);
-    }
-
+    .attribution { font-size: 13px; color: var(--mute); }
     .attribution a {
       color: var(--mute);
       text-decoration: none;
@@ -465,29 +432,20 @@
       color: var(--ink);
       text-decoration: none;
     }
-    .site-nav-brand .star {
-      width: 20px; height: 20px; color: var(--ink);
-    }
+    .site-nav-brand .star { width: 20px; height: 20px; color: var(--ink); }
     .site-nav-brand .star svg { width: 100%; height: 100%; display: block; }
     .site-nav-brand .wordmark {
       display: flex; align-items: baseline; gap: 6px;
       letter-spacing: 0.03em;
     }
-    .site-nav-brand .brand-text {
-      font-weight: 500; text-transform: uppercase;
-    }
+    .site-nav-brand .brand-text { font-weight: 500; text-transform: uppercase; }
     .site-nav-brand .slash { font-weight: 300; color: var(--mute); }
     .site-nav-brand .tagline {
       font-family: 'DM Serif Display', Georgia, serif;
       font-style: italic; font-weight: 400;
       font-size: 17px;
     }
-    .site-nav-links {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    .site-nav-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
     .site-nav-link {
       font-size: 12px;
       color: var(--mute);
@@ -499,25 +457,21 @@
       font-weight: 500;
     }
     .site-nav-link:hover { color: var(--ink); }
-    .site-nav-link.active {
-      color: var(--ink);
-      border-bottom-color: var(--ink);
-    }
+    .site-nav-link.active { color: var(--ink); border-bottom-color: var(--ink); }
 
     /* ---------- Responsive ---------- */
+    @media (max-width: 860px) {
+      .team-grid { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 720px) {
       .page { padding: 48px 20px 64px; }
-      .hero { padding: 24px 0 48px; }
-      .hero-visual { height: 200px; }
+      .hero { padding: 24px 0 56px; }
+      .hero h1 { margin-bottom: 44px; }
       section { padding: 48px 0; }
-
-      .framework-grid,
-      .work-grid,
-      .values-grid,
-      .team-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
+      .experience-grid,
+      .partner-grid { grid-template-columns: 1fr; gap: 0; }
+      .partner-grid { gap: 16px; }
+      .values-grid { grid-template-columns: 1fr; gap: 16px; }
     }
     @media (max-width: 620px) {
       .site-nav { padding: 12px 20px; }
@@ -554,7 +508,7 @@
         <a href="./home.html" class="site-nav-link active" aria-current="page">Home</a>
         <a href="./quick-start.html" class="site-nav-link">Quick Start</a>
         <a href="./way-of-work.html" class="site-nav-link">The Way of Work</a>
-        <a href="./communications-compass.html" class="site-nav-link">The Communications Compass</a>
+        <a href="./communications-compass.html" class="site-nav-link">The Compass</a>
       </div>
     </div>
   </nav>
@@ -565,114 +519,126 @@
     <header class="hero">
       <div class="logo-mark"><svg><use href="#star"/></svg></div>
       <h1>find your <em>way to value</em></h1>
-      <p class="subhead">We help you close the gap between what you are and how you communicate.</p>
-      <div class="hero-visual" aria-hidden="true">
-        <!-- Original editorial mark: 12 thin radials, four bolder cardinal arms echoing the Communications Compass four-audience map. Not a copy of any source visual. -->
-        <svg viewBox="0 0 560 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(280 110)">
-            <!-- 12 thin radials -->
-            <g stroke="currentColor" stroke-width="0.5" opacity="0.35">
-              <line x1="-180" y1="0" x2="-12" y2="0"/>
-              <line x1="180" y1="0" x2="12" y2="0"/>
-              <line x1="0" y1="-90" x2="0" y2="-12"/>
-              <line x1="0" y1="90" x2="0" y2="12"/>
-              <line x1="-155" y1="-78" x2="-10" y2="-5"/>
-              <line x1="155" y1="-78" x2="10" y2="-5"/>
-              <line x1="-155" y1="78" x2="-10" y2="5"/>
-              <line x1="155" y1="78" x2="10" y2="5"/>
-              <line x1="-90" y1="-90" x2="-8" y2="-8"/>
-              <line x1="90" y1="-90" x2="8" y2="-8"/>
-              <line x1="-90" y1="90" x2="-8" y2="8"/>
-              <line x1="90" y1="90" x2="8" y2="8"/>
-            </g>
-            <!-- four cardinal arms, bolder -->
-            <g stroke="currentColor" stroke-width="1.2">
-              <line x1="-220" y1="0" x2="-30" y2="0"/>
-              <line x1="220" y1="0" x2="30" y2="0"/>
-              <line x1="0" y1="-100" x2="0" y2="-22"/>
-              <line x1="0" y1="100" x2="0" y2="22"/>
-            </g>
-            <!-- terminal nodes on the cardinal arms -->
-            <circle cx="-220" cy="0" r="2.5" fill="currentColor"/>
-            <circle cx="220" cy="0" r="2.5" fill="currentColor"/>
-            <circle cx="0" cy="-100" r="2.5" fill="currentColor"/>
-            <circle cx="0" cy="100" r="2.5" fill="currentColor"/>
-            <!-- center: small star -->
-            <g transform="translate(-13 -13)">
-              <svg width="26" height="26" viewBox="0 0 41 41"><use href="#star"/></svg>
-            </g>
-            <!-- cardinal labels -->
-            <g font-family="DM Sans, sans-serif" font-size="9" font-weight="500" letter-spacing="1.8" fill="currentColor" opacity="0.5" text-transform="uppercase">
-              <text x="0" y="-112" text-anchor="middle">EMPLOYEES</text>
-              <text x="0" y="118" text-anchor="middle">PARTNERS</text>
-            </g>
-          </g>
-        </svg>
+
+      <div class="hero-opening">
+        <p class="hero-lead">We will start our engagement with you with one question:</p>
+        <p class="the-question">What do you value, as an organization?</p>
+        <div class="prose">
+          <p>Your answer will determine the nature of our relationship.</p>
+          <p>And whatever your answer, you have almost certainly encountered difficulties and obstacles, taken wrong turns, and tasted poisonous fruit along the way, in your pursuit of value. Perhaps that's the case right now, and if so, it is a good time to look into the symptoms and causes of your pain.</p>
+        </div>
       </div>
     </header>
 
-    <!-- What We Do -->
-    <section id="what-we-do">
-      <div class="section-label">What we do</div>
-      <h2>Five ways we help you <em>say it better</em>.</h2>
+    <!-- 01 Symptoms and Causes -->
+    <section id="symptoms-and-causes">
+      <div class="section-label">01</div>
+      <h2>Symptoms and <em>Causes</em></h2>
 
-      <div class="services" id="services"></div>
+      <div class="prose">
+        <p>Healthier revenue streams, higher customer and employee satisfaction, and sustainable growth are all results and benefits of continuous change in behaviour of an organization and its people. Change in behaviour requires change in knowledge, and change in knowledge requires the experience of taking action, and witnessing, observing and thinking about the outcome.</p>
+        <p>This experience, processed into knowledge, enables us to make judgements and decisions that will surface as behaviours, which will, in turn, direct the organization's path towards value.</p>
+        <p>Now, what you will most often approach us with, or what we will most often identify in your organizational activity is a symptom: a concrete problem or dysfunction that is hurting you and your efforts to create value for yourselves and your market.</p>
+        <p>You might want us to deal with surface-level, market-facing symptoms that are hurting your revenue, profit margins and bottom line, such as:</p>
+      </div>
 
-      <a class="compass-link" href="./communications-compass.html">See how each service applies to each audience in the Communications Compass →</a>
-    </section>
+      <ul class="symptom-list">
+        <li>marketing that gets plenty of attention, but not from the people who would enter a value exchange with you,</li>
+        <li>lead generation that fills the pipeline with names, and the calendar with conversations that were never going to go anywhere,</li>
+        <li>sales workflows where the right prospects stall, go quiet, and get written off as bad timing,</li>
+        <li>customer care that hears the complaints, but never the reasons people stay or leave.</li>
+      </ul>
 
-    <!-- How We Work -->
-    <section id="how-we-work">
-      <div class="section-label">How we work</div>
-      <h2>Two frameworks, <em>running in parallel</em>.</h2>
-      <p class="section-intro">Every engagement we take on rests on the same two frameworks, running in parallel. The Communications Compass describes who you're actually talking to, while the Way of Work describes how we get there together. We run them in parallel because a good message to the wrong audience ends up being just as expensive as a bad message to the right one.</p>
-
-      <div class="framework-grid">
-        <div class="framework-card compass">
-          <div class="label">The Communications Compass</div>
-          <h3>Who you are talking to.</h3>
-          <p>A map of the four groups every organization is in constant conversation with: your market, your existing customers, your employees, and your partners and vendors. Each arm of the Compass lays out how our services and values apply to that audience.</p>
-          <a class="explore" href="./communications-compass.html">Explore the Compass →</a>
-        </div>
-        <div class="framework-card wow">
-          <div class="label">The Way of Work</div>
-          <h3>How we get there together.</h3>
-          <p>Four continuous tracks (Discovery, Delivery, Validation, and Integration) that turn strategy into interfaces, test them against real audience behavior, and fold the learning back into practice. Engagements run as episodes rather than phases.</p>
-          <a class="explore" href="./way-of-work.html">Explore the Way of Work →</a>
-        </div>
+      <div class="prose">
+        <p>Or you might approach us with deeper-lying symptoms that are affecting internal and external communication flows, employee motivation, or strategic and operational decision making.</p>
+        <p>What we know from experience is that these layers of symptoms are, in fact, intertwined and interdependent. Whichever symptom we address first will almost certainly lead us to deeper underlying causes, which are in turn symptoms of even deeper causes. Like a ball of string, unraveling in the Minotaur's labyrinth, we will plot our way through the corridors until we hit the light of day.</p>
+        <p>This means we can deal with one symptom at a time, along with the assumptions about what is causing it. Which brings us to our way of work.</p>
       </div>
     </section>
 
-    <!-- What We've Done -->
-    <section id="what-weve-done">
-      <div class="section-label">What we've done</div>
-      <h2>The work <em>speaks for itself</em>.</h2>
-      <p class="section-intro">Proof organized by category rather than as a chronological list. Each engagement carries a short outcome where one exists publicly, or within NDA bounds where it does not.</p>
+    <!-- 02 Way of Work -->
+    <section id="way-of-work" class="framework">
+      <div class="section-label wow">02 · The framework</div>
+      <h2>Way of <em>Work</em></h2>
 
-      <div class="work-grid" id="work-grid"></div>
+      <div class="prose">
+        <p>The Way of Work turns one symptom, and the assumptions we hold about what is causing it, into one improvement that holds. It runs in four tracks, Discovery, Delivery, Validation and Integration, which are not phases that follow one another, but run continuously and in parallel, for as long as we work together.</p>
+        <p>Each cycle starts with what you know and what you are assuming, builds it into an interface that carries your value to the audience it is meant for, and reads what comes back. What we learn there folds into the way your organization operates, as a value increment: what worked is kept and built on, what did not is left behind. That is one turn of the thread, and then we do it again.</p>
+      </div>
+
+      <a class="framework-link wow" href="./way-of-work.html">Explore the Way of Work &rarr;</a>
     </section>
 
-    <!-- Values -->
+    <!-- 03 Instruments -->
+    <section id="instruments">
+      <div class="section-label">03</div>
+      <h2><em>Instruments</em></h2>
+
+      <div class="prose">
+        <p>These are the four instruments we work with. None of them is an end in itself. Each one is a means of pursuing value, and every cycle picks up whichever of them the symptom in front of us calls for.</p>
+      </div>
+
+      <div class="instruments" id="instruments-list"></div>
+    </section>
+
+    <!-- 04 Values -->
     <section id="values">
-      <div class="section-label">Our value system</div>
-      <h2>Four commitments, <em>every engagement</em>.</h2>
+      <div class="section-label">04</div>
+      <h2><em>Values</em></h2>
+
+      <div class="prose">
+        <p>Four commitments that hold in every cycle, whichever instrument we happen to have in our hands.</p>
+      </div>
 
       <div class="values-grid" id="values-grid"></div>
+
+      <div class="prose bridge">
+        <p>Before we take the first step in addressing the identified symptom and its causes, we need to get our bearings straight, in terms of who needs to be involved and what their roles are, for each cycle in the way of work. For this we need a compass.</p>
+      </div>
     </section>
 
-    <!-- Team -->
+    <!-- 05 The Compass -->
+    <section id="compass" class="framework">
+      <div class="section-label compass">05 · The framework</div>
+      <h2>The <em>Compass</em></h2>
+
+      <div class="prose">
+        <p>The Compass is a 360 degree map of your stakeholders. It has four points: the market you want to attract, the customers you already serve, the employees who carry your values into the world every day, and the partners and vendors you depend on to deliver. A symptom rarely sits in just one of these conversations. It will usually show up in several at once, and sometimes in all four, which is why we map where it spreads across the whole circle before we decide anything.</p>
+        <p>That map is one half of the work. The other half is planning what the cycle will take: which of the four instruments it will draw on, who inside your organization needs to be in the room, and what the work will ask of them. Seeing where a symptom spreads is also what lets us choose where to enter it, because we still take one conversation at a time. The people closest to that conversation are the ones holding the knowledge and the assumptions we are about to test.</p>
+      </div>
+
+      <a class="framework-link compass" href="./communications-compass.html">Explore the Compass &rarr;</a>
+    </section>
+
+    <!-- 06 Experience -->
+    <section id="experience">
+      <div class="section-label">06</div>
+      <h2><em>Experience</em></h2>
+
+      <div class="experience-grid" id="experience-grid"></div>
+    </section>
+
+    <!-- 05 Team -->
     <section id="team">
-      <div class="section-label">Who's behind the work</div>
-      <h2>The people you'll <em>actually work with</em>.</h2>
+      <div class="section-label">07</div>
+      <h2><em>Team</em></h2>
 
       <div class="team-grid" id="team-grid"></div>
+    </section>
+
+    <!-- 06 Partner Network -->
+    <section id="partner-network">
+      <div class="section-label">08</div>
+      <h2>Partner <em>Network</em></h2>
+
+      <div class="partner-grid" id="partner-grid"></div>
     </section>
 
     <!-- Contact -->
     <section id="connect">
       <div class="section-label">Let's connect</div>
-      <h2>What's <em>on your mind</em>?</h2>
-      <p class="connect-intro">Every engagement begins with discovery, then moves through our Way of Work cycle. If you'd rather see the work before the longer conversation, <a href="./quick-start.html">Quick Start</a> is how we begin.</p>
+      <h2>What do <em>you value</em>?</h2>
+      <p class="connect-intro">That is where we start. Tell us what you are working toward, and what is getting in the way of it right now.</p>
 
       <form class="form" onsubmit="event.preventDefault();">
         <p class="form-subhead">A human will read your message, and reply within a business day.</p>
@@ -691,9 +657,9 @@
         &nbsp;·&nbsp;
         <a href="./quick-start.html">Quick Start →</a>
         &nbsp;·&nbsp;
-        <a href="./communications-compass.html">The Communications Compass →</a>
-        &nbsp;·&nbsp;
         <a href="./way-of-work.html">The Way of Work →</a>
+        &nbsp;·&nbsp;
+        <a href="./communications-compass.html">The Compass →</a>
       </p>
     </footer>
 
@@ -702,131 +668,120 @@
   <script>
     // ---------- Data ----------
 
-    const SERVICES = [
+    const INSTRUMENTS = [
       {
-        name: 'Brand Works',
-        tagline: 'Develop and refresh your brand to stay relevant and visible.',
-        expansion: 'Your brand is usually the first thing a new audience judges you on, and it has to do real work before anyone reads what you actually want to say.'
+        name: 'Brand',
+        tagline: 'What you are understood to be, before anyone has spoken to you.',
+        expansion: 'Brand carries your value in compressed form. It is the instrument we reach for first when what you actually are has drifted out of step with how you are read.'
       },
       {
-        name: 'Community Connect',
-        tagline: 'Socialize your brand and values in the spaces your audiences already gather.',
-        expansion: 'Campaigns get attention; consistent presence earns trust, and the difference compounds over time.'
+        name: 'Product',
+        tagline: 'What you make, and what your market actually gets to use.',
+        expansion: 'Product is where value stops being a claim and becomes something a person can put to work. That makes it the sharpest instrument for testing whether the value you believe you create is the value they experience.'
       },
       {
-        name: 'Attention Grab',
-        tagline: 'Get eyeballs on what matters and build clout.',
-        expansion: 'Attention is the precondition for everything else, and earning it in a noisy market takes more than volume.'
+        name: 'Communications',
+        tagline: 'The flows that carry value out, and bring the response back.',
+        expansion: 'Communications is how you say what you are, and just as much, how you hear what came back. Every interface we build in a cycle runs on this instrument.'
       },
       {
-        name: 'RevDev',
-        tagline: 'Develop and sustain healthy revenue streams.',
-        expansion: 'Communications that don\u2019t translate into revenue don\u2019t pay for themselves, so we build the messaging and materials that do.'
-      },
-      {
-        name: 'IRL',
-        tagline: 'Get people into the room where it happens.',
-        expansion: 'The relationships that move business forward are still formed in person, and the moments that matter deserve to be designed rather than left to chance.'
-      }
-    ];
-
-    const WORK = [
-      {
-        category: 'Media Development',
-        items: [
-          { client: 'BIRN / Balkan Insight', outcome: 'Rebuilt the editorial platform for 300+ journalists.' }
-        ]
-      },
-      {
-        category: 'Web 3 Product Development & Launches',
-        items: [
-          { client: 'Cere Network', outcome: null },
-          { client: 'Anchor', outcome: null },
-          { client: 'Inery', outcome: null }
-        ]
-      },
-      {
-        category: 'Content Development, PR & Socials',
-        items: [
-          { client: 'Ahrefs', outcome: null }
-        ]
-      },
-      {
-        category: 'Fortune 50 Companies',
-        items: [
-          { client: 'US Bank [under NDA]', outcome: null },
-          { client: 'Consumer Goods Company [under NDA]', outcome: null }
-        ]
+        name: 'Revenue',
+        tagline: 'The exchange where value is confirmed.',
+        expansion: 'Revenue is the moment someone decides that what you offer is worth what they give for it. We work the pipelines, the workflows and the relationships that make that exchange happen, and then happen again.'
       }
     ];
 
     const VALUES = [
       {
         name: 'Human First',
-        description: 'Technology does a lot of things well, but it\u2019s never been great at replacing people. We keep the human connection at the center of everything we do and treat technology as what it should be: a tool that brings people closer together, not a substitute for real relationship.'
+        description: 'Technology does a lot of things well, but it’s never been great at replacing people. We keep the human connection at the center of everything we do and treat technology as what it should be: a tool that brings people closer together, not a substitute for real relationship.'
       },
       {
         name: 'Zero Distance',
-        description: 'The best communications disappear. When the connection between you and the people you serve feels seamless, with no friction and no noise, just value flowing in both directions, that\u2019s what we\u2019re working toward. It\u2019s an ideal we\u2019ll never fully reach, and that\u2019s exactly what keeps us sharp.'
+        description: 'The best communications disappear. When the connection between you and the people you serve feels seamless, with no friction and no noise, just value flowing in both directions, that’s what we’re working toward. It’s an ideal we’ll never fully reach, and that’s exactly what keeps us sharp.'
       },
       {
         name: 'Sustainable Growth',
-        description: 'Fast isn\u2019t the same as healthy, and we\u2019ve seen enough organizations burn through momentum to know the difference. We help you build growth that matches your capacity, compounds over time, and feeds itself rather than depleting what got you here.'
+        description: 'Fast isn’t the same as healthy, and we’ve seen enough organizations burn through momentum to know the difference. We help you build growth that matches your capacity, compounds over time, and feeds itself rather than depleting what got you here.'
       },
       {
         name: 'Resilient Outcomes',
-        description: 'Markets shift and plans change, and the work we do together is designed to hold up when they do. We measure what\u2019s working, learn from what isn\u2019t, and fold those insights into the next stage of the work so that every outcome makes the next one stronger.'
+        description: 'Markets shift and plans change, and the work we do together is designed to hold up when they do. We measure what’s working, learn from what isn’t, and fold those insights into the next stage of the work so that every outcome makes the next one stronger.'
+      }
+    ];
+
+    const EXPERIENCE = [
+      {
+        industry: 'Banking',
+        engagements: ['New product and new market validation for a big three bank (US)']
+      },
+      {
+        industry: 'Legal Services',
+        engagements: ['Lead generation for a debt relief legal services provider (US)']
+      },
+      {
+        industry: 'Consumer Goods',
+        engagements: ['New product category demand and product validation for a household goods Fortune 50 company (US)']
+      },
+      {
+        industry: 'Sports Tech',
+        engagements: ['Crowdfunding (Kickstarter), prototype validation, branding & lead generation (US, EU)']
+      },
+      {
+        industry: 'News Media & Journalism',
+        engagements: ['Newsroom change management, platform and process design and development, content monetization (Europe)']
+      },
+      {
+        industry: 'Green Tech',
+        engagements: ['Demand tests and value proposition validation for a waste pickup and sorting service (US)']
+      },
+      {
+        industry: 'Blockchain',
+        engagements: [
+          'Governance design, white paper, product development, token launch campaigns and marketing (US, Europe)',
+          'Content development, social media management & paid media (US)'
+        ]
+      },
+      {
+        industry: 'HR Tech',
+        engagements: [
+          'Product prototyping for organizational design, leadership coaching & team facilitation (US)',
+          'HRIS product development (Europe)'
+        ]
       }
     ];
 
     const TEAM = [
-      {
-        name: 'Miloš',
-        initial: 'M',
-        bio: '20+ years of experience across journalism, media, non-profit, SaaS, HR tech, and B2B. He has helped design and scale platforms, products, and campaigns that require both narrative precision and solid technical thinking, while keeping teams aligned on clear intent and measurable outcomes. Clients value Miloš for three things: a systems mindset that connects architecture, product, communications, and user/customer experience; an ability to translate complex ideas into clear, resonant language; and a mentoring style that develops people as much as it delivers projects. At North Star Communications, he anchors the work in continuous discovery, crisp positioning, and go-to-market clarity.',
-        placeholder: false
-      },
-      {
-        name: '[ second team member: TBD ]',
-        initial: '',
-        bio: 'Portrait and bio of comparable length. The bio will overlap with Miloš\u2019s where shared values and collaborative approach are concerned, and extend coverage into areas his bio does not lead with.',
-        placeholder: true
-      }
+      { name: 'Miloš', initial: 'M', placeholder: false },
+      { name: 'Slobodan', initial: 'S', placeholder: false },
+      { name: 'Tijana', initial: 'T', placeholder: false },
+      { name: '?', initial: '?', placeholder: true }
+    ];
+
+    const PARTNERS = [
+      { name: 'Prota Studios', services: 'Product validation, Growth' },
+      { name: 'Umbrella Marketing Agency', services: 'Content development, Social media management, Event management, Video production' },
+      { name: 'Modulate', services: 'Paid media' },
+      { name: 'Cogent Deciphering', services: 'Web development, App development' },
+      { name: 'The Glinda Group', services: 'Leadership coaching, Change management, Organizational culture building' }
     ];
 
     // ---------- Render ----------
 
-    const servicesEl = document.getElementById('services');
-    SERVICES.forEach((s, i) => {
+    const instrumentsEl = document.getElementById('instruments-list');
+    INSTRUMENTS.forEach((s, i) => {
       const num = String(i + 1).padStart(2, '0');
       const el = document.createElement('div');
-      el.className = 'service';
+      el.className = 'instrument';
       el.innerHTML = `
-        <span class="service-num">${num}</span>
-        <span class="service-name">${s.name}</span>
-        <div class="service-body">
-          <div class="service-tagline">${s.tagline}</div>
-          <div class="service-expansion">${s.expansion}</div>
+        <span class="instrument-num">${num}</span>
+        <span class="instrument-name">${s.name}</span>
+        <div class="instrument-body">
+          <div class="instrument-tagline">${s.tagline}</div>
+          <div class="instrument-expansion">${s.expansion}</div>
         </div>
       `;
-      servicesEl.appendChild(el);
-    });
-
-    const workEl = document.getElementById('work-grid');
-    WORK.forEach(cat => {
-      const el = document.createElement('div');
-      el.className = 'work-category';
-      const items = cat.items.map(it => `
-        <li class="work-item">
-          <span class="work-client">${it.client}</span>
-          <span class="work-outcome${it.outcome ? '' : ' tbd'}">${it.outcome || '[ outcome TBD ]'}</span>
-        </li>
-      `).join('');
-      el.innerHTML = `
-        <h3>${cat.category}</h3>
-        <ul class="work-list">${items}</ul>
-      `;
-      workEl.appendChild(el);
+      instrumentsEl.appendChild(el);
     });
 
     const valuesEl = document.getElementById('values-grid');
@@ -840,19 +795,40 @@
       valuesEl.appendChild(el);
     });
 
+    const experienceEl = document.getElementById('experience-grid');
+    EXPERIENCE.forEach(cat => {
+      const el = document.createElement('div');
+      el.className = 'industry';
+      const items = cat.engagements.map(e => `<li>${e}</li>`).join('');
+      el.innerHTML = `
+        <h3>${cat.industry}</h3>
+        <ul>${items}</ul>
+      `;
+      experienceEl.appendChild(el);
+    });
+
     const teamEl = document.getElementById('team-grid');
     TEAM.forEach(m => {
       const el = document.createElement('div');
       el.className = 'member';
       const photoClass = m.placeholder ? 'member-photo placeholder' : 'member-photo';
-      const photoContent = m.placeholder ? '[ photo ]' : m.initial;
-      const bioClass = m.placeholder ? 'member-bio placeholder' : 'member-bio';
+      const nameClass = m.placeholder ? 'member-name placeholder' : 'member-name';
       el.innerHTML = `
-        <div class="${photoClass}">${photoContent}</div>
-        <div class="member-name">${m.name}</div>
-        <div class="${bioClass}">${m.bio}</div>
+        <div class="${photoClass}">${m.initial}</div>
+        <div class="${nameClass}">${m.name}</div>
       `;
       teamEl.appendChild(el);
+    });
+
+    const partnerEl = document.getElementById('partner-grid');
+    PARTNERS.forEach(p => {
+      const el = document.createElement('div');
+      el.className = 'partner';
+      el.innerHTML = `
+        <h3>${p.name}</h3>
+        <p>${p.services}</p>
+      `;
+      partnerEl.appendChild(el);
     });
   </script>
 </body>
