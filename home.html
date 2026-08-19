@@ -225,9 +225,11 @@
       width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
       background: var(--rule);
       display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
       font-family: 'DM Serif Display', Georgia, serif;
       font-size: 17px; color: var(--mute);
     }
+    .tm-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .tm-who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
     .tm-name { font-size: 15px; font-weight: 500; color: var(--ink); }
     .tm-title { font-size: 13.5px; color: var(--mute); line-height: 1.45; }
@@ -278,6 +280,36 @@
       margin-bottom: 10px; color: var(--ink);
     }
     .partner p { font-size: 14.5px; color: rgba(0,0,0,0.6); line-height: 1.55; }
+
+    /* ---------- Contact ---------- */
+    .connect-intro {
+      font-size: 16px; color: rgba(0,0,0,0.6);
+      margin-bottom: 40px; max-width: 680px; line-height: 1.7;
+    }
+    .form { max-width: 680px; }
+    .form-subhead { font-size: 15px; color: var(--mute); margin-bottom: 28px; }
+    .form-label {
+      display: block;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em;
+      font-weight: 600; color: var(--mute); margin-bottom: 8px;
+    }
+    .form-input, .form textarea {
+      width: 100%;
+      padding: 15px 18px;
+      font-family: inherit; font-size: 15px; color: var(--ink);
+      border: 1px solid rgba(0,0,0,0.2); border-radius: 10px; background: #fff;
+      margin-bottom: 22px;
+    }
+    .form textarea { min-height: 150px; resize: vertical; }
+    .form-input::placeholder, .form textarea::placeholder { color: rgba(0,0,0,0.4); }
+    .form-input:focus, .form textarea:focus { outline: none; border-color: var(--mute); }
+    .form-action { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+    .form button {
+      background: var(--ink); color: var(--paper); border: none;
+      padding: 12px 24px; font-family: inherit; font-size: 15px; font-weight: 500;
+      border-radius: 8px; cursor: not-allowed; opacity: 0.5;
+    }
+    .form-note { font-size: 13px; color: rgba(0,0,0,0.4); font-style: italic; }
 
     /* ---------- Footer ---------- */
     footer {
@@ -490,12 +522,15 @@
     <!-- Connect -->
     <section id="connect">
       <div class="section-label">Let&rsquo;s connect</div>
-      <h2>Think I can <em>help you</em>?</h2>
+      <h2>What&rsquo;s on <em>your mind</em>?</h2>
       <p class="connect-intro">Tell me what you are working toward, and what is getting in the way of it right now.</p>
 
       <form class="form" onsubmit="event.preventDefault();">
         <p class="form-subhead">A human will read your message, and reply within a business day.</p>
-        <textarea placeholder="What's on your mind?"></textarea>
+        <label class="form-label" for="cf-email">Email</label>
+        <input class="form-input" id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" />
+        <label class="form-label" for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" placeholder="What's on your mind?"></textarea>
         <div class="form-action">
           <button type="submit" disabled>Send</button>
           <span class="form-note">Form is a placeholder. Not yet wired up.</span>
@@ -524,33 +559,33 @@
     // to the full text. Order is as specified.
     const TESTIMONIALS = [
       { name: 'James Coplien', title: 'Lean/Agile Process and Architecture Coach', rel: 'Mentor',
-        quote: "Miloš is one of my most humble and brilliant friends and colleagues. His humility tends to hide his prowess and the power of the insights that he has occasionally blessed me with. Miloš is exactly the kind of guy I wish I was working with, that I had as a colleague on my team, or that lived down the street for the occasional intellectual discussion over beers.", trimmed: true },
+        quote: "Miloš is one of my most humble and brilliant friends and colleagues. His humility tends to hide his prowess and the power of the insights that he has occasionally blessed me with. Miloš is exactly the kind of guy I wish I was working with, that I had as a colleague on my team, or that lived down the street for the occasional intellectual discussion over beers.", trimmed: true , photo: 'coplien' },
       { name: 'Fred Jin', title: 'Founder & CEO, CEF.ai', rel: 'Client',
-        quote: "Milos provided great freelance writing work for us. He was professional, highly engaged with a heathy dose of curiosity to understand the nuances of all the technologies and networks. A highly effective marketer/writer, and a good collaborator and teammate was well.", trimmed: false },
+        quote: "Milos provided great freelance writing work for us. He was professional, highly engaged with a heathy dose of curiosity to understand the nuances of all the technologies and networks. A highly effective marketer/writer, and a good collaborator and teammate was well.", trimmed: false , photo: 'jin' },
       { name: 'William Leborgne', title: 'SEO & Organic Growth Leader', rel: 'Client',
-        quote: "Miloš is without a doubt one of the most capable marketers I've worked with. His knowledge, attention to detail and positive energy always made it a pleasure to work with him. He doesn't just problem solve, he strives to find the absolute best solution.", trimmed: true },
+        quote: "Miloš is without a doubt one of the most capable marketers I've worked with. His knowledge, attention to detail and positive energy always made it a pleasure to work with him. He doesn't just problem solve, he strives to find the absolute best solution.", trimmed: true , photo: 'leborgne' },
       { name: 'Tijana Damjanović Gertner', title: 'Marketer extraordinaire', rel: 'Worked on the same team',
-        quote: "Milos is one of the most amazing professionals I've had the pleasure to work with, and be mentored by. His approach has helped me grow as a professional, learn more, test, implement, while his support encouraged me to take on more challenges.", trimmed: true },
+        quote: "Milos is one of the most amazing professionals I've had the pleasure to work with, and be mentored by. His approach has helped me grow as a professional, learn more, test, implement, while his support encouraged me to take on more challenges.", trimmed: true , photo: 'gertner' },
       { name: 'Benjamin Camus', title: 'Head of Global Marketing Operations & Digital Strategy', rel: 'Worked on the same team',
-        quote: "Milos is a conscientious and very hardworking professional. He is a pleasant individual who believes in positive motivation and his colleagues are never dissatisfied. I would describe him as a dedicated and enthusiastic individual who has a great penchant for analytics, innovation meeting deadlines.", trimmed: true },
+        quote: "Milos is a conscientious and very hardworking professional. He is a pleasant individual who believes in positive motivation and his colleagues are never dissatisfied. I would describe him as a dedicated and enthusiastic individual who has a great penchant for analytics, innovation meeting deadlines.", trimmed: true , photo: 'camus' },
       { name: 'Mazen Haddad', title: 'Global Head of Growth & Demand Generation', rel: 'Worked on the same team',
-        quote: "Milos is probably one of the most versatile and up-to-date digital experts I know. He brings with him a lot of strong digital knowledge particularly around user interface and experience. He skills also extend to paid digital media, SEO, social media and PR.", trimmed: true },
+        quote: "Milos is probably one of the most versatile and up-to-date digital experts I know. He brings with him a lot of strong digital knowledge particularly around user interface and experience. He skills also extend to paid digital media, SEO, social media and PR.", trimmed: true , photo: 'haddad' },
       { name: 'Benjamin Knight', title: 'Freelance journalist, film maker, translator', rel: 'Client',
-        quote: "Miloš did a fantastic job creating my new homepage. I'm really happy with it. He paid attention to every detail and coordinated his team efficiently, and never bothered me with nuts and bolts I didn't need to know.", trimmed: true },
+        quote: "Miloš did a fantastic job creating my new homepage. I'm really happy with it. He paid attention to every detail and coordinated his team efficiently, and never bothered me with nuts and bolts I didn't need to know.", trimmed: true , photo: 'knight' },
       { name: 'Ralph van der Zijden', title: 'Founder / Owner, Note Differently', rel: 'Client',
-        quote: "Milos has contributed to the online visibility of my company iBikeBelgrade in a tremendous way. As a new company dependent to attract clients from all over the world, having a website that is easily found and providing the right information is of great essence.", trimmed: true },
+        quote: "Milos has contributed to the online visibility of my company iBikeBelgrade in a tremendous way. As a new company dependent to attract clients from all over the world, having a website that is easily found and providing the right information is of great essence.", trimmed: true , photo: 'zijden' },
       { name: 'James Alistair Gunn', title: 'Founder, Absolute Associates', rel: 'Client',
-        quote: "His Serbian team has executed Western-standard web development and social media projects, and possess excellent creative and technical skills, supported by on-time and on-budget management. A Western budget holder could be confident to offshore their design requirements to Milos and his team.", trimmed: true },
+        quote: "His Serbian team has executed Western-standard web development and social media projects, and possess excellent creative and technical skills, supported by on-time and on-budget management. A Western budget holder could be confident to offshore their design requirements to Milos and his team.", trimmed: true , photo: 'gunn' },
       { name: 'Ivan Jureta', title: 'Senior Vice President, Corporate Infrastructure, STEMCELL Technologies', rel: 'Worked together',
-        quote: "I highly recommend working with Milos. I have worked with him on various projects over the last 5 years, including BIRN - it was and remains a pleasure. He has an excellent grasp of both problems and potential solutions.", trimmed: true },
+        quote: "I highly recommend working with Milos. I have worked with him on various projects over the last 5 years, including BIRN - it was and remains a pleasure. He has an excellent grasp of both problems and potential solutions.", trimmed: true , photo: 'jureta' },
       { name: 'Dejan Restak', title: 'CEO, Vibe', rel: 'Worked together',
-        quote: "From the B92 circle of coleagues, Milos belongs to the most excellent ones in the field of website editing and development. Because internet media are also striving to survive financially and reach sustainability, his business understanding and management knowledge is fundamental.", trimmed: true },
+        quote: "From the B92 circle of coleagues, Milos belongs to the most excellent ones in the field of website editing and development. Because internet media are also striving to survive financially and reach sustainability, his business understanding and management knowledge is fundamental.", trimmed: true , photo: 'restak' },
       { name: 'Markus Balázs Göransson', title: 'Associate Professor in War Studies, Swedish Defence University', rel: 'Reported to Miloš',
-        quote: "During my few weeks in Serbia, and later while I was working on the piece from home, Miloš was always very encouraging and supportive, and regularly offered good and concrete advice that helped me to move forward in my research and writing.", trimmed: true },
+        quote: "During my few weeks in Serbia, and later while I was working on the piece from home, Miloš was always very encouraging and supportive, and regularly offered good and concrete advice that helped me to move forward in my research and writing.", trimmed: true , photo: 'goransson' },
       { name: 'Ivan Marković', title: 'Co-Founder, Everchanging Me', rel: 'Worked on the same team',
-        quote: "Miloš and I have been working together on a stablecoin project (Anchor) for a year or so, and I have nothing but praise for him, both as a consummate professional and a great human being.", trimmed: true },
+        quote: "Miloš and I have been working together on a stablecoin project (Anchor) for a year or so, and I have nothing but praise for him, both as a consummate professional and a great human being.", trimmed: true , photo: 'markovic' },
       { name: 'Tamara Dutina', title: 'Public Cloud Manager, Mainstream', rel: 'Managed Miloš directly',
-        quote: "I was cooperating with Miloš and his content team on several big projects, both in English and Serbian. For SuperAdmins website, he helped us create outstanding content that engages, ranks and converts.", trimmed: true }
+        quote: "I was cooperating with Miloš and his content team on several big projects, both in English and Serbian. For SuperAdmins website, he helped us create outstanding content that engages, ranks and converts.", trimmed: true , photo: 'dutina' }
     ];
 
     const CAPABILITIES = [
@@ -632,7 +667,7 @@
       card.innerHTML = `
         <blockquote class="tm-quote">&ldquo;${t.trimmed ? t.quote.replace(/\.$/, '') + '&hellip;' : t.quote}&rdquo;</blockquote>
         <div class="tm-attrib">
-          <div class="tm-avatar" aria-hidden="true">${initials(t.name)}</div>
+          <div class="tm-avatar" aria-hidden="true">${t.photo ? `<img src="img/testimonials/${t.photo}.jpg" alt="" loading="lazy" width="46" height="46">` : initials(t.name)}</div>
           <div class="tm-who">
             <span class="tm-name">${t.name}</span>
             <span class="tm-title">${t.title}</span>
