@@ -11,12 +11,11 @@
 
         body {
             font-family: 'DM Sans', system-ui, sans-serif;
-            background: #F4F1EA;
+            background: var(--paper);
             color: var(--ink);
-            padding: 2.5rem 1.5rem;
         }
 
-        .wrapper { max-width: 1020px; margin: 0 auto; }
+        .wrapper { max-width: 1020px; margin: 0 auto; padding: 2.5rem 1.5rem; }
 
         /* ───── Editorial intro / outcome sections ───── */
         .intro, .outcome {
@@ -129,55 +128,6 @@
         .detail-header h2 { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
         .detail-header p { font-size: 0.78rem; color: rgba(0,0,0,0.4); margin-top: 0.15rem; }
         .detail-body { font-size: 0.85rem; line-height: 1.72; color: rgba(0,0,0,0.6); }
-
-        /* ---------- Main nav ---------- */
-        .site-nav {
-            margin: -2.5rem -1.5rem 2.5rem;
-            padding: 1rem 1.5rem;
-            background: #F4F1EA;
-            border-bottom: 1px solid var(--rule);
-        }
-        .site-nav-inner {
-            max-width: 1020px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .site-nav-brand {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--ink);
-            text-decoration: none;
-            letter-spacing: -0.005em;
-        }
-        .site-nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .site-nav-link {
-            font-size: 0.875rem;
-            color: var(--mute);
-            text-decoration: none;
-            padding-bottom: 2px;
-            border-bottom: 1px solid transparent;
-        }
-        .site-nav-link:hover { color: var(--ink); }
-        .site-nav-link.active {
-            color: var(--ink);
-            font-weight: 500;
-            border-bottom-color: var(--ink);
-        }
-        @media (max-width: 620px) {
-            .site-nav { padding: 0.75rem 1rem; margin: -2.5rem -1.5rem 2rem; }
-            .site-nav-inner { gap: 0.75rem; }
-            .site-nav-links { gap: 0.875rem; }
-            .site-nav-link, .site-nav-brand { font-size: 0.8125rem; }
-        }
     
         :root {
             --paper: #F4F1EA;
@@ -192,18 +142,71 @@
             background-repeat: repeat; background-size: 128px;
             mix-blend-mode: multiply;
         }
-        .site-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); font-size: 15px; }
-        .site-nav-brand .brand-star { width: 20px; height: 20px; color: var(--ink); display: inline-block; }
-        .site-nav-brand .brand-star svg { width: 100%; height: 100%; display: block; }
-        .site-nav-brand .brand-wm { display: flex; align-items: baseline; gap: 6px; letter-spacing: 0.03em; }
-        .site-nav-brand .brand-name { font-weight: 500; text-transform: uppercase; }
-        .site-nav-brand .brand-slash { font-weight: 300; color: var(--mute); }
-        .site-nav-brand .brand-tag { font-family: 'DM Serif Display', Georgia, serif; font-style: italic; font-weight: 400; font-size: 17px; }
         h1.doc-title, h2.doc-h2, .page-header h1 {
             font-family: 'DM Serif Display', Georgia, serif !important;
             font-weight: 400 !important;
             letter-spacing: -0.015em !important;
         }
+
+    /* ---------- Site chrome (canonical: identical on every page) ----------
+       Do not edit per page. Source of record: content/web/CHROME.md          */
+    html { scroll-padding-top: 80px; }
+
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--ink); color: var(--paper);
+      padding: 10px 16px; border-radius: 0 0 6px 0;
+      font-size: 14px; font-weight: 500; text-decoration: none;
+    }
+    .skip-link:focus { left: 0; }
+
+    .site-nav {
+      display: block;
+      line-height: 1.6;                 /* self-contained: never inherit page body */
+      position: sticky; top: 0; z-index: 100;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      padding: 20px 32px;
+    }
+    .site-nav-inner {
+      max-width: 1020px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .site-nav-brand {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px; color: var(--ink); text-decoration: none;
+    }
+    .site-nav-brand .star { width: 20px; height: 20px; color: var(--ink); }
+    .site-nav-brand .star svg { width: 100%; height: 100%; display: block; }
+    .site-nav-brand .wordmark {
+      display: flex; align-items: baseline; gap: 6px; letter-spacing: 0.03em;
+    }
+    .site-nav-brand .brand-text { font-weight: 500; text-transform: uppercase; }
+    .site-nav-brand .slash { font-weight: 300; color: var(--mute); }
+    .site-nav-brand .tagline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-style: italic; font-weight: 400; font-size: 17px;
+    }
+    .site-nav-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+    .site-nav-link {
+      font-size: 12px; color: var(--mute); text-decoration: none;
+      padding-bottom: 4px; border-bottom: 1px solid transparent;
+      text-transform: uppercase; letter-spacing: 0.14em; font-weight: 500;
+    }
+    .site-nav-link:hover { color: var(--ink); }
+    .site-nav-link:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+    .site-nav-link[aria-current="page"] { color: var(--ink); border-bottom-color: var(--ink); }
+    .site-nav-region {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em;
+      color: var(--mute); font-weight: 500;
+    }
+    @media (max-width: 620px) {
+      .site-nav { padding: 12px 20px; }
+      .site-nav-inner { gap: 12px; }
+      .site-nav-links { gap: 14px; }
+      .site-nav-link, .site-nav-brand { font-size: 13px; }
+    }
 </style>
 </head>
 <body>
@@ -217,25 +220,27 @@
 </svg>
 <div class="grain" aria-hidden="true"></div>
 
-<nav class="site-nav" aria-label="Main">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-nav" role="banner">
     <div class="site-nav-inner">
-        <a href="./home.html" class="site-nav-brand" aria-label="North Star Communications">
-            <span class="brand-star"><svg><use href="#star"/></svg></span>
-            <span class="brand-wm">
-                <span class="brand-name">North&nbsp;Star</span>
-                <span class="brand-slash">/</span>
-                <span class="brand-tag">Communications</span>
-            </span>
-        </a>
-        <div class="site-nav-links">
-            <a href="./home.html" class="site-nav-link">Home</a>
-            <a href="./quick-start.html" class="site-nav-link">Quick Start</a>
-            <a href="./way-of-work.html" class="site-nav-link active" aria-current="page">The Way of Work</a>
-            <a href="./communications-compass.html" class="site-nav-link">The Compass</a>
-        </div>
+      <a href="./home.html" class="site-nav-brand" aria-label="North Star Communications, home">
+        <span class="star"><svg><use href="#star"/></svg></span>
+        <span class="wordmark">
+          <span class="brand-text">North&nbsp;Star</span>
+          <span class="slash">/</span>
+          <span class="tagline">Communications</span>
+        </span>
+      </a>
+      <nav class="site-nav-links" aria-label="Main">
+        <a href="./home.html" class="site-nav-link">Home</a>
+        <a href="./quick-start.html" class="site-nav-link">Quick Start</a>
+        <a href="./way-of-work.html" class="site-nav-link" aria-current="page">The Way of Work</a>
+        <a href="./communications-compass.html" class="site-nav-link">The Compass</a>
+      </nav>
     </div>
-</nav>
-<div class="wrapper">
+  </header>
+<main class="wrapper" id="main">
 
     <section class="intro">
         <div class="intro__eyebrow">The Way of Work</div>
@@ -583,7 +588,7 @@
         <p class="outcome__body">The goal isn't a finished product. It's an organization that gets better at creating value with every cycle — one that reads its audience honestly, folds what works into how it actually operates, and starts each new cycle from real knowledge rather than old assumptions.</p>
     </section>
 
-</div>
+</main>
 
 <script>
 const TRACKS = {
