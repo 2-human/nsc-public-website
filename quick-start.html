@@ -340,12 +340,25 @@
       max-width: 36ch;
     }
     .cta__form { grid-column: 7 / span 6; }
-    .cta__sublabel {
+    .cta__label {
+      display: block;
       font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
       color: var(--mute);
       font-weight: 500;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
+    .cta__form input + .cta__label { margin-top: 22px; }
+    .cta__form input {
+      width: 100%;
+      padding: 18px;
+      font-family: inherit;
+      font-size: 15.5px;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--ink);
+    }
+    .cta__form input::placeholder { color: var(--mute); font-style: italic; }
+    .cta__form input:focus { outline: none; }
     .cta__form textarea {
       width: 100%;
       min-height: 160px;
@@ -772,9 +785,11 @@
             <p class="cta__sub">I'll tell you what your Growth Fix could look like, and what it would cost to find out whether the longer engagement is worth it for both of us.</p>
           </div>
           <div class="cta__form">
-            <div class="cta__sublabel">A human will read your message, and reply within a business day.</div>
             <form onsubmit="event.preventDefault();">
-              <textarea placeholder="Pipeline, marketing, brand, or something else? Tell me what you're seeing."></textarea>
+              <label class="cta__label" for="gf-email">Email</label>
+              <input id="gf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" />
+              <label class="cta__label" for="gf-message">Message</label>
+              <textarea id="gf-message" name="message" placeholder="Pipeline, marketing, brand, or something else? Tell me what you're seeing."></textarea>
               <div class="cta__action">
                 <button type="submit" class="cta__submit" disabled>
                   Send
