@@ -281,12 +281,26 @@
       background: #fff; border: 1px solid var(--rule);
       border-radius: 12px; padding: 24px;
     }
+    .partner-head {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 12px;
+    }
+    .partner-logo {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 8px; object-fit: contain; background: #fff;
+    }
     .partner h3 {
       font-family: 'DM Serif Display', Georgia, serif;
       font-size: clamp(20px, 2vw, 25px);
       font-weight: 400; letter-spacing: -0.01em; line-height: 1.05;
-      margin-bottom: 10px; color: var(--ink);
+      margin-bottom: 0; color: var(--ink);
     }
+    .partner h3 a {
+      color: inherit; text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+    .partner h3 a:hover { border-bottom-color: var(--mute); }
+    .partner h3 a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
     .partner p { font-size: 14.5px; color: rgba(0,0,0,0.6); line-height: 1.55; }
 
     /* ---------- Contact ---------- */
@@ -451,7 +465,7 @@
       <div class="logo-mark"><svg><use href="#star"/></svg></div>
       <h1>find your way to value</h1>
       <div class="hero-opening">
-        <p class="hero-lead">North Star Communications is currently a one-person company that will help you develop and improve your products, communications, revenue, and processes with a network of high quality, trusted and proven implementation partners.</p>
+        <p class="hero-lead">North Star Communications is currently a one-person company that will help you develop and improve your products, communications, revenue, and processes with a network of high quality, trusted, and proven implementation partners.</p>
       </div>
     </header>
 
@@ -504,7 +518,7 @@
         <div class="about-photo"><img src="img/milos.jpg" alt="" width="96" height="96" loading="lazy" /></div>
         <div class="prose">
           <p>My name is Miloš Milosavljević. If you don’t speak a Slavic language, you get 5% off your first engagement with me if you pronounce both of my names correctly off the bat.</p>
-          <p>I am a D-shaped generalist with more than two decades of experience and achievements across a wide array of industries and competences. The pillars of my expertise is developing product, process, and communications for exchanges of value across digital interfaces.</p>
+          <p>I am a D-shaped generalist with more than two decades of experience and achievements across a wide array of industries and competences. The pillars of my expertise are the development of product, process, and communications for exchanges of value across digital interfaces.</p>
           <p>I like to work with people and organizations who are proficient in their domain, and aim to create value for all the participants in the ecosystem they operate in, as well as to make the world a better place to live in.</p>
           <p>My professional credo is to arrive with optimism and good will, to share my knowledge and learn about your domain, and strive to become unnecessary in due time.</p>
         </div>
@@ -632,16 +646,26 @@
           'Content development, social media management & paid media (US)'] },
       { industry: 'HR Tech', engagements: [
           'Product prototyping for organizational design, leadership coaching & team facilitation (US)',
-          'HRIS product development (Europe)'] }
+          'HRIS product development (Europe)',
+          'Employee engagement product marketing (Europe)'] }
     ];
 
+    // logo: each partner's own mark, taken from their site or LinkedIn page.
+    // url: their website. Oblac's oblac.studio does not resolve, so their card
+    // points at LinkedIn, their only live presence. Tzobe has neither yet.
     const PARTNERS = [
-      { name: 'Umbrella Marketing Agency', services: 'Content development, social media management, event management, video production' },
-      { name: 'Modulate', services: 'Paid media, analytics and reporting' },
-      { name: 'The Glinda Group', services: 'Leadership coaching, change management' },
-      { name: 'Tzobe', services: 'Brand development & positioning' },
-      { name: 'Oblac Studio', services: 'Complex software development' },
-      { name: 'Cogent Deciphering', services: 'Web & app development' }
+      { name: 'Umbrella Marketing Agency', logo: 'umbrella', url: 'https://umbrellamarketing.agency/',
+        services: 'Content development, social media management, event management, video production' },
+      { name: 'Modulate', logo: 'modulate', url: 'https://modulate.biz/',
+        services: 'Paid media, analytics and reporting' },
+      { name: 'The Glinda Group', logo: 'glinda', url: 'https://glindagroup.com/',
+        services: 'Leadership coaching, change management' },
+      { name: 'Tzobe',
+        services: 'Brand development & positioning' },
+      { name: 'Oblac Studio', logo: 'oblac', url: 'https://www.linkedin.com/company/0blac/',
+        services: 'Complex software development' },
+      { name: 'Cogent Deciphering', logo: 'cogent', url: 'https://cogentdeciphering.com/',
+        services: 'Web & app development' }
     ];
 
     // ---------- Render ----------
@@ -668,7 +692,13 @@
     PARTNERS.forEach(p => {
       const el = document.createElement('div');
       el.className = 'partner';
-      el.innerHTML = `<h3>${p.name}</h3><p>${p.services}</p>`;
+      const logo = p.logo
+        ? `<img class="partner-logo" src="img/partners/${p.logo}.png" alt="" loading="lazy" width="40" height="40">`
+        : '';
+      const name = p.url
+        ? `<a href="${p.url}" target="_blank" rel="noopener noreferrer">${p.name}</a>`
+        : p.name;
+      el.innerHTML = `<div class="partner-head">${logo}<h3>${name}</h3></div><p>${p.services}</p>`;
       partnerEl.appendChild(el);
     });
 
