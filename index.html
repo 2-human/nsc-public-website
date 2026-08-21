@@ -286,7 +286,11 @@
     .partner-logo {
       width: 40px; height: 40px; flex-shrink: 0;
       border-radius: 8px; object-fit: contain; background: #fff;
+      filter: grayscale(1); opacity: 0.6;
+      transition: filter 0.25s ease, opacity 0.25s ease;
     }
+    .partner:hover .partner-logo,
+    .partner:focus-within .partner-logo { filter: grayscale(0); opacity: 1; }
     .partner h3 {
       font-family: 'DM Serif Display', Georgia, serif;
       font-size: clamp(20px, 2vw, 25px);

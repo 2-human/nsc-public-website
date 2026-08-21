@@ -73,6 +73,8 @@
         .track-group { transition: opacity 0.22s ease; }
         .track-group.dimmed { opacity: 0.12; }
         .track-hit { cursor: pointer; fill: transparent; }
+        .track-label { cursor: pointer; }
+        .track-label:hover { text-decoration: underline; }
         .node-group { cursor: pointer; }
         .arrow-group { cursor: pointer; }
 
@@ -331,9 +333,9 @@
 
                 <!-- Track label -->
                 <text x="192" y="73" text-anchor="end"
-                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#7cb9e0">Continual</text>
+                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#7cb9e0" class="track-label" onclick="selectTrack('discovery')">Continual</text>
                 <text x="192" y="88" text-anchor="end"
-                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0369a1">Discovery</text>
+                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0369a1" class="track-label" onclick="selectTrack('discovery')">Discovery</text>
             </g>
 
             <!-- ═════════════════════════════════════════
@@ -382,9 +384,9 @@
 
                 <!-- Track label -->
                 <text x="192" y="183" text-anchor="end"
-                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#86c98e">Continual</text>
+                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#86c98e" class="track-label" onclick="selectTrack('delivery')">Continual</text>
                 <text x="192" y="198" text-anchor="end"
-                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#15803d">Delivery</text>
+                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#15803d" class="track-label" onclick="selectTrack('delivery')">Delivery</text>
             </g>
 
             <!-- ═════════════════════════════════════════
@@ -417,9 +419,9 @@
 
                 <!-- Track label -->
                 <text x="192" y="293" text-anchor="end"
-                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#e8799f">Continual</text>
+                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#e8799f" class="track-label" onclick="selectTrack('validation')">Continual</text>
                 <text x="192" y="308" text-anchor="end"
-                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#be185d">Validation</text>
+                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#be185d" class="track-label" onclick="selectTrack('validation')">Validation</text>
             </g>
 
             <!-- ═════════════════════════════════════════
@@ -452,9 +454,9 @@
 
                 <!-- Track label -->
                 <text x="192" y="403" text-anchor="end"
-                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#b799f0">Continual</text>
+                    font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#b799f0" class="track-label" onclick="selectTrack('integration')">Continual</text>
                 <text x="192" y="418" text-anchor="end"
-                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#7c3aed">Integration</text>
+                    font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#7c3aed" class="track-label" onclick="selectTrack('integration')">Integration</text>
             </g>
 
             <!-- ═════════════════════════════════════════
