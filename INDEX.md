@@ -1,6 +1,8 @@
 # public/website/
 
-Rendered HTML pages for the North Star Communications website. This folder mirrors verbatim to `2-human/nsc-public-website` via the workflow at `.github/workflows/sync-public.yml`. Pages serve at `https://2-human.github.io/nsc-public-website/<filename>.html` (or at the configured CNAME, when one is set).
+Rendered HTML pages for the North Star Communications website. This folder mirrors verbatim to `2-human/nsc-public-website` via the workflow at `.github/workflows/sync-public.yml`. Pages serve at `https://nsc.agency/<filename>.html`.
+
+**Do not delete `CNAME`.** It carries the custom domain (`nsc.agency`) and must live in *this folder*, not just in the mirror. The sync runs `rsync --delete` and excludes only `.git`, `.DS_Store`, `Thumbs.db`, `.surface.yml` and `.no-sync`, so a `CNAME` created through the GitHub Pages UI exists only in the mirror and is deleted on the next sync, silently unsetting the custom domain and taking the site offline.
 
 Canonical sources for each page live in `content/`. Edit `content/` first, regenerate the HTML, commit both. Do not edit these HTML files directly without an entry in the corresponding `content/` doc.
 
