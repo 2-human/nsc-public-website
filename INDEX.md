@@ -10,7 +10,7 @@ Canonical sources for each page live in `content/`. Edit `content/` first, regen
 
 - **`index.html`** — the home page, served at the root (`https://nsc.agency/`). Renders from [`content/web/pages/home/PAGE.md`](../../content/web/pages/home/PAGE.md).
 - **`home.html`** — a redirect stub to `/`, kept so the previous published URL does not 404. Not the home page any more; edit `index.html`.
-- **`quick-start.html`** — Growth Fix offer page. Renders from [`content/web/pages/quick-start/PAGE.md`](../../content/web/pages/quick-start/PAGE.md). The primary commercial entry point from the nav.
+- **`quick-start.html`** — Quick Fix offer page. Renders from [`content/web/pages/quick-start/PAGE.md`](../../content/web/pages/quick-start/PAGE.md). The primary commercial entry point from the nav.
 - **`way-of-work.html`** — Way of Work framework, single merged page (intro → interactive diagram → outcome). Renders from [`content/frameworks/way-of-work/FRAMEWORK.md`](../../content/frameworks/way-of-work/FRAMEWORK.md). Merged 2026-05-19 from the prior doc-only + interactive split.
 - **`communications-compass.html`** — Compass framework, single merged page (intro → interactive diagram → outcome). Renders from [`content/frameworks/communications-compass/FRAMEWORK.md`](../../content/frameworks/communications-compass/FRAMEWORK.md). Merged 2026-05-19.
 
