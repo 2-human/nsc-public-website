@@ -72,6 +72,19 @@
 
         .track-group { transition: opacity 0.22s ease; }
         .track-group.dimmed { opacity: 0.12; }
+
+        /* Element focus: clicking a node or process highlights every instance of
+           it and pushes the rest back. Dimming is applied per element rather
+           than to the parent group, because opacity on a parent multiplies down
+           and a child cannot then raise itself back to full. */
+        .track-group > *,
+        .arrow-group { transition: opacity 0.25s ease; }
+        svg.el-focus .track-group > *:not(.el-on) { opacity: 0.12; }
+        svg.el-focus > .arrow-group:not(.el-on)   { opacity: 0.12; }
+        svg.el-focus .el-on                        { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+            .track-group > *, .arrow-group { transition: none; }
+        }
         .track-hit { cursor: pointer; fill: transparent; }
         .track-label { cursor: pointer; }
         .track-label:hover { text-decoration: underline; }
@@ -679,6 +692,7 @@ let currentElement = null;
 
 function selectTrack(id) {
     currentElement = null;
+    clearElementFocus();
     if (currentId === id) {
         currentId = null;
         document.querySelectorAll('.track-group').forEach(g => g.classList.remove('dimmed'));
@@ -692,15 +706,42 @@ function selectTrack(id) {
     renderDetail(TRACKS[id]);
 }
 
+function diagramSvg() {
+    const t = document.querySelector('.track-group');
+    return t ? t.closest('svg') : null;
+}
+
+function clearElementFocus() {
+    const svg = diagramSvg();
+    if (svg) svg.classList.remove('el-focus');
+    document.querySelectorAll('.el-on').forEach(g => g.classList.remove('el-on'));
+}
+
+// Every node and process appears more than once (Interface four times, Build
+// and Feedforward twice each). Selecting one marks them all, so the whole
+// pattern reads at a glance rather than a single occurrence.
+function highlightElement(id) {
+    clearElementFocus();
+    const svg = diagramSvg();
+    if (!svg) return;
+    document.querySelectorAll('.node-group, .arrow-group').forEach(g => {
+        const m = (g.getAttribute('onclick') || '').match(/selectElement\('([^']+)'\)/);
+        if (m && m[1] === id) g.classList.add('el-on');
+    });
+    svg.classList.add('el-focus');
+}
+
 function selectElement(id) {
     currentId = null;
     document.querySelectorAll('.track-group').forEach(g => g.classList.remove('dimmed'));
     if (currentElement === id) {
         currentElement = null;
+        clearElementFocus();
         document.getElementById('detail').classList.remove('open');
         return;
     }
     currentElement = id;
+    highlightElement(id);
     renderDetail(ELEMENTS[id]);
 }
 
