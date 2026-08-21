@@ -199,11 +199,10 @@
 
     /* ---------- Testimonials ---------- */
     .tm { margin-top: 8px; }
-    .tm-viewport { overflow: hidden; transition: height 0.45s cubic-bezier(0.19,1,0.22,1); }
-    @media (prefers-reduced-motion: reduce) { .tm-viewport { transition: none; } }
+    .tm-viewport { overflow: hidden; }
     .tm-track {
       display: flex;
-      align-items: flex-start;        /* each card keeps its own height */
+      align-items: stretch;           /* every card fills the locked height */
       gap: 20px;
       transition: transform 0.55s cubic-bezier(0.19,1,0.22,1);
     }
@@ -751,9 +750,16 @@
     }
 
     const viewport = document.querySelector('.tm-viewport');
+
+    // Lock the viewport to the TALLEST card rather than the active one, so
+    // moving between slides never reflows the page. Natural heights are only
+    // measurable with stretch released, so release it, measure, then re-lock.
     function sizeViewport() {
-      const card = track.children[idx];
-      if (card) viewport.style.height = card.offsetHeight + 'px';
+      track.style.alignItems = 'flex-start';
+      viewport.style.height = 'auto';
+      const tallest = Math.max(...[...track.children].map(c => c.offsetHeight));
+      track.style.alignItems = '';
+      viewport.style.height = tallest + 'px';
     }
     window.addEventListener('resize', sizeViewport);
     window.addEventListener('load', sizeViewport);
