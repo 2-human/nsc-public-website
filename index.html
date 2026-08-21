@@ -234,7 +234,14 @@
     }
     .tm-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .tm-who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-    .tm-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+    .tm-name {
+      font-size: 15px; font-weight: 500; color: var(--ink);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .tm-li { display: inline-flex; color: rgba(0,0,0,0.35); transition: color 0.2s ease; }
+    .tm-li:hover { color: #0A66C2; }
+    .tm-li:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 2px; }
+    .tm-li svg { width: 15px; height: 15px; fill: currentColor; display: block; }
     .tm-title { font-size: 13.5px; color: var(--mute); line-height: 1.45; }
     .tm-rel {
       font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.14em;
@@ -410,6 +417,9 @@
       <symbol id="star" viewBox="0 0 41 41">
         <path d="M20.4927 41L17.9311 33.3152C17.1376 30.9282 15.7982 28.7591 14.0195 26.9804C12.2408 25.2017 10.0718 23.8624 7.68476 23.0689L0 20.4927L7.68476 17.9311C10.0718 17.1376 12.2408 15.7982 14.0195 14.0195C15.7982 12.2408 17.1376 10.0718 17.9311 7.68475L20.4927 0L23.0543 7.6994C23.8585 10.0723 25.2025 12.2262 26.9805 13.9915C28.7585 15.7568 30.922 17.0854 33.3006 17.8725L41 20.4341L33.3006 23.0103C30.9136 23.8039 28.7445 25.1432 26.9658 26.9219C25.1871 28.7006 23.8478 30.8697 23.0543 33.2567L20.4927 41ZM9.28026 20.5073C11.8426 21.4693 14.1692 22.9691 16.1032 24.9057C18.0373 26.8423 19.5341 29.1707 20.4927 31.7344C21.4521 29.1688 22.9508 26.839 24.8876 24.9022C26.8244 22.9654 29.1542 21.4667 31.7197 20.5073C29.1561 19.5487 26.8277 18.0519 24.891 16.1179C22.9544 14.1838 21.4547 11.8573 20.4927 9.2949C19.5452 11.8682 18.0527 14.2064 16.1174 16.1492C14.1822 18.0921 11.8499 19.5937 9.28026 20.5512V20.5073Z" fill="currentColor"/>
       </symbol>
+      <symbol id="li" viewBox="0 0 24 24">
+        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+      </symbol>
     </defs>
   </svg>
 
@@ -572,33 +582,31 @@
     // Recommendations written on LinkedIn, quoted in full and verbatim.
     // Order is as specified.
     const TESTIMONIALS = [
-      { name: 'James Coplien', title: 'Lean/Agile Process and Architecture Coach', org: 'Gertrud & Cope', rel: 'Mentor', photo: 'coplien',
+      { name: 'James Coplien', title: 'Lean/Agile Process and Architecture Coach', org: 'Gertrud & Cope', rel: 'Mentor', photo: 'coplien', year: '2025', linkedin: 'https://www.linkedin.com/in/coplien/',
         quote: "Miloš is one of my most humble and brilliant friends and colleagues. His humility tends to hide his prowess and the power of the insights that he has occasionally blessed me with. Miloš is exactly the kind of guy I wish I was working with, that I had as a colleague on my team, or that lived down the street for the occasional intellectual discussion over beers. Also sensitive to the human side of things, his knowledge is at the leading edge of software engineering, An absolute joy to have as a colleague." },
-      { name: 'Fred Jin', title: 'Founder & CEO', org: 'CEF.ai', rel: 'Client', photo: 'jin',
+      { name: 'Fred Jin', title: 'Founder & CEO', org: 'CEF.ai', rel: 'Client', photo: 'jin', year: '2021',
         quote: "Milos provided great freelance writing work for us. He was professional, highly engaged with a heathy dose of curiosity to understand the nuances of all the technologies and networks. A highly effective marketer/writer, and a good collaborator and teammate was well." },
-      { name: 'William Leborgne', title: 'SEO & Organic Growth Leader', org: 'GrowthX AI', rel: 'Client', photo: 'leborgne',
+      { name: 'William Leborgne', title: 'SEO & Organic Growth Leader', org: 'GrowthX AI', rel: 'Client', photo: 'leborgne', year: '2019', linkedin: 'https://www.linkedin.com/in/williamleborgne/',
         quote: "Miloš is without a doubt one of the most capable marketers I've worked with. His knowledge, attention to detail and positive energy always made it a pleasure to work with him. He doesn't just problem solve, he strives to find the absolute best solution. I can't recommend him enough." },
-      { name: 'Tijana Damjanović Gertner', title: 'Marketer extraordinaire', org: 'Umbrella Marketing Agency', rel: 'Worked on the same team', photo: 'gertner',
+      { name: 'Tijana Damjanović Gertner', title: 'Marketer extraordinaire', org: 'Umbrella Marketing Agency', rel: 'Worked on the same team', photo: 'gertner', year: '2025', linkedin: 'https://www.linkedin.com/in/tijanadamjanovicgertner/',
         quote: "Milos is one of the most amazing professionals I've had the pleasure to work with, and be mentored by. His approach has helped me grow as a professional, learn more, test, implement, while his support encouraged me to take on more challenges. On each project we collaborated on, he offered deep insights, superior technical knowledge, and out-of-the-box ideas and solutions. Whether the project included marketing strategy and execution, project management, or human resources, Milos has been an invaluable part of it. He's able and willing to see each aspect of the issue and handle it with an approach that is systematic and plays to the strengths of each of his team members. What makes working with Milos truly exceptional is the fact that he is also an amazing human being - great for a chat or a laugh." },
-      { name: 'Benjamin Camus', title: 'Head of Global Marketing Operations & Digital Strategy', org: 'HBK Hottinger Brüel & Kjær', rel: 'Worked on the same team', photo: 'camus',
+      { name: 'Benjamin Camus', title: 'Head of Global Marketing Operations & Digital Strategy', org: 'HBK Hottinger Brüel & Kjær', rel: 'Worked on the same team', photo: 'camus', year: '2017', linkedin: 'https://www.linkedin.com/in/bencamus/',
         quote: "Milos is a conscientious and very hardworking professional. He is a pleasant individual who believes in positive motivation and his colleagues are never dissatisfied. I would describe him as a dedicated and enthusiastic individual who has a great penchant for analytics, innovation meeting deadlines. Milos is an accomplished multitasker who has helped us a lot in Digital Marketing." },
-      { name: 'Mazen Haddad', title: 'Global Head of Growth & Demand Generation', org: 'Migrate', rel: 'Worked on the same team', photo: 'haddad',
+      { name: 'Mazen Haddad', title: 'Global Head of Growth & Demand Generation', org: 'Migrate', rel: 'Worked on the same team', photo: 'haddad', year: '2017', linkedin: 'https://www.linkedin.com/in/mazenvhaddad/',
         quote: "Milos is probably one of the most versatile and up-to-date digital experts I know. He brings with him a lot of strong digital knowledge particularly around user interface and experience. He skills also extend to paid digital media, SEO, social media and PR. He was collaborative and a real pleasure to work with. He's an asset to any company he works for." },
-      { name: 'Benjamin Knight', title: 'Freelance journalist, film maker, translator', org: 'Deutsche Welle', rel: 'Client', photo: 'knight',
+      { name: 'Benjamin Knight', title: 'Freelance journalist, film maker, translator', org: 'Deutsche Welle', rel: 'Client', photo: 'knight', year: '2014', linkedin: 'https://www.linkedin.com/in/benjamin-knight-80a41432/',
         quote: "Miloš did a fantastic job creating my new homepage. I'm really happy with it. He paid attention to every detail and coordinated his team efficiently, and never bothered me with nuts and bolts I didn't need to know. He kept me in the loop about what was being done, and was excellent at explaining the mechanics of the website. He also found a way to adapt my vague ideas about what I wanted into a working website. And he was happy to answer all my questions and make final alterations - even after he'd been paid!" },
-      { name: 'Ralph van der Zijden', title: 'Founder / Owner', org: 'Note Differently', rel: 'Client', photo: 'zijden',
+      { name: 'Ralph van der Zijden', title: 'Founder / Owner', org: 'Note Differently', rel: 'Client', photo: 'zijden', year: '2012',
         quote: "Milos has contributed to the online visibility of my company iBikeBelgrade in a tremendous way. As a new company dependent to attract clients from all over the world, having a website that is easily found and providing the right information is of great essence. Apart from explaining in detail and in a very clear manner how to reach our goals, Milos shows a genuine interest in his work and even after the official contract-period keeps being involved and open to assist.  His approach is refreshing and makes working with him much better than working with any ' anonymous'  marketing / IT agency. Milos is one of those rare but valuable  IT-experts that understand you and knows how to ' translate'  the online-world to your business-needs and vice versa. Ralph van der Zijden www.ibikebelgrade.com" },
-      { name: 'James Alistair Gunn', title: 'Founder', org: 'Absolute Associates', rel: 'Client', photo: 'gunn',
-        quote: "Milos and his team have supported British investment company Greenhouse Capital Group with advertising creative and website design and development services since end-2010 with an example of his work found at www.greenhouse-capital.com.  His Serbian team has executed Western-standard web development and social media projects, and possess excellent creative and technical skills, supported by on-time and on-budget management.  A Western budget holder could be confident to offshore their design requirements to Milos and his team." },
-      { name: 'Ivan Jureta', title: 'Senior Vice President, Corporate Infrastructure', org: 'STEMCELL Technologies', rel: 'Worked together', photo: 'jureta',
+      { name: 'Ivan Jureta', title: 'Senior Vice President, Corporate Infrastructure', org: 'STEMCELL Technologies', rel: 'Worked together', photo: 'jureta', year: '2010',
         quote: "I highly recommend working with Milos. I have worked with him on various projects over the last 5 years, including BIRN - it was and remains a pleasure. He has an excellent grasp of both problems and potential solutions. He is intelligent, dedicated, hard-working and efficient. What I truly value most is his ability to understand problems and solutions both from various viewpoints (e.g., engineering, business) and across various levels of abstraction (e.g., in case of systems, from abstract models, down to architecture, and further down to functions and interfaces)." },
-      { name: 'Dejan Restak', title: 'CEO', org: 'Vibe', rel: 'Worked together', photo: 'restak',
+      { name: 'Dejan Restak', title: 'CEO', org: 'Vibe', rel: 'Worked together', photo: 'restak', year: '2008',
         quote: "From the B92 circle of coleagues, Milos belongs to the most excellent ones in the field of website editing and development. Because internet media are also striving to survive financially and reach sustainability, his business understanding and management knowledge is fundamental. A strategic vision on website development is his strongest capacity. He possesses both analytical as well as synthetic skills, being capable to quickly adopt a new knowledge, synthesize it, generalize it and apply it efficiently. His proactive attitude, always accompanied with a cross checking, matches all the complex tasks he faced." },
-      { name: 'Markus Balázs Göransson', title: 'Associate Professor in War Studies', org: 'Swedish Defence University', rel: 'Reported to Miloš', photo: 'goransson',
+      { name: 'Markus Balázs Göransson', title: 'Associate Professor in War Studies', org: 'Swedish Defence University', rel: 'Reported to Miloš', photo: 'goransson', year: '2010',
         quote: "As an intern at B92, I collaborated with Miloš on an extended article tracing Serbia’s history through the ages. It was intended for a section on tourism envisaged for B92’s English language website. During my few weeks in Serbia, and later while I was working on the piece from home, Miloš was always very encouraging and supportive, and regularly offered good and concrete advice that helped me to move forward in my research and writing. I remember Miloš as a gifted communicator, who easily conveyed his vision of what my article should be, and also as a competent leader who could keep many irons in the fire while having the composure and presence of mind to readily engage with any questions that I might have about my article. He helped to guide my work by spelling out how he envisaged that the article would fit into the website’s tourism section and the kind of readership that it would target, but all this while giving me a lot of freedom in the actual research and writing process. Based on my experience of working with Miloš, I recommend him without reservation." },
-      { name: 'Ivan Marković', title: 'Co-Founder', org: 'Everchanging Me', rel: 'Worked on the same team', photo: 'markovic',
+      { name: 'Ivan Marković', title: 'Co-Founder', org: 'Everchanging Me', rel: 'Worked on the same team', photo: 'markovic', year: '2019',
         quote: "Miloš and I have been working together on a stablecoin project (Anchor) for a year or so, and I have nothing but praise for him, both as a consummate professional and a great human being. In the beginning, we had mostly collaborated on whitepaper development, but the scope of our work has gradually evolved into some very concrete aspects of product development. While it's easy to gush about his exceptional copy writing skills and language command - Miloš edits to perfection even terribly uninspired and messy documents, invariably executing final messaging with bullseye precision - it's his mind (and the multicore processor behind it ;-)) that does multitasking wonders every single day. Being a CMO, he is primarily focused on strategic aspects of blockchain and crypto marketing, but it's his capability to step outside of his daily body of work (which is anything but routine), pick up new pieces of information on the fly, and provide instant feedback and insightful creative ideas that never ceases to amaze me. With his brilliant mind Miloš could be anything, but, fortunately enough, he is my colleague that I am truly privileged to work with." },
-      { name: 'Tamara Dutina', title: 'Public Cloud Manager', org: 'Mainstream', rel: 'Client', photo: 'dutina',
+      { name: 'Tamara Dutina', title: 'Public Cloud Manager', org: 'Mainstream', rel: 'Client', photo: 'dutina', year: '2021', linkedin: 'https://www.linkedin.com/in/dutinatamara/',
         quote: "I was cooperating with Miloš and his content team on several big projects, both in English and Serbian. For SuperAdmins website, he helped us create outstanding content that engages, ranks and converts. His work approach is detailed, methodical and proactive. Highly recommended." }
     ];
 
@@ -683,9 +691,9 @@
         <div class="tm-attrib">
           <div class="tm-avatar" aria-hidden="true">${t.photo ? `<img src="img/testimonials/${t.photo}.jpg" alt="" loading="lazy" width="46" height="46">` : initials(t.name)}</div>
           <div class="tm-who">
-            <span class="tm-name">${t.name}</span>
+            <span class="tm-name">${t.name}${t.linkedin ? `<a class="tm-li" href="${t.linkedin}" target="_blank" rel="noopener noreferrer" aria-label="${t.name} on LinkedIn"><svg aria-hidden="true"><use href="#li"/></svg></a>` : ''}</span>
             <span class="tm-title">${t.title}${t.org ? ' &middot; ' + t.org : ''}</span>
-            <span class="tm-rel">${t.rel}</span>
+            <span class="tm-rel">${t.rel}${t.year ? ` &middot; ${t.year}` : ''}</span>
           </div>
         </div>`;
       track.appendChild(card);
