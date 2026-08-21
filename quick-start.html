@@ -118,13 +118,6 @@
       width: 14px; height: 14px; display: inline-block; color: var(--ink);
     }
     .hero__eyebrow .star svg { width: 100%; height: 100%; display: block; }
-    .hero__art {
-      grid-column: 9 / span 4;
-      display: flex; justify-content: flex-end;
-      align-self: start;
-      margin-bottom: 24px;
-    }
-    .hero__art svg { width: 100%; max-width: 260px; height: auto; display: block; color: var(--ink); opacity: 0.85; }
     .hero h1 {
       grid-column: 1 / span 12;
       font-size: clamp(48px, 9vw, 140px);
@@ -432,15 +425,13 @@
       .hero__inner, .sec-head, .first-move, .why, .cta, .foot__inner {
         grid-template-columns: 1fr;
       }
-      .hero__eyebrow, .hero__art, .hero__lead, .hero__meta,
+      .hero__eyebrow, .hero__lead, .hero__meta,
       .sec-head .eyebrow, .sec-head h2, .sec-head__intro,
       .first-move__copy, .first-move__caption, .first-move__art,
       .why__body, .why__links,
       .cta__head, .cta__form, .foot .logo, .foot__nav {
         grid-column: 1 / -1;
       }
-      .hero__art { justify-content: flex-start; margin-bottom: 0; }
-      .hero__art svg { max-width: 180px; }
       .foot__nav { justify-content: flex-start; }
       .symptoms { grid-template-columns: 1fr; }
       .symptom { border-right: none; border-bottom: 1px solid var(--rule); }
@@ -567,27 +558,6 @@
           <div class="hero__eyebrow">
             <span class="star"><svg><use href="#star-solid"/></svg></span>
             <span class="eyebrow">Growth Fix</span>
-          </div>
-
-          <!-- Hero motif: radial of paths converging on a single point (original, not from source) -->
-          <div class="hero__art" aria-hidden="true">
-            <svg viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- thin radial lines converging on a single point on the right -->
-              <g stroke="currentColor" stroke-width="0.6" opacity="0.65">
-                <path d="M0 30 L220 90"/>
-                <path d="M0 60 L220 90"/>
-                <path d="M0 90 L220 90"/>
-                <path d="M0 120 L220 90"/>
-                <path d="M0 150 L220 90"/>
-              </g>
-              <!-- one bolder line: the "loudest" symptom -->
-              <path d="M0 90 L220 90" stroke="currentColor" stroke-width="1.4"/>
-              <!-- terminal node -->
-              <circle cx="220" cy="90" r="3.5" fill="currentColor"/>
-              <!-- thin arc continuing past the node, suggesting the path that opens up after -->
-              <path d="M220 90 Q 240 90 250 70" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
-              <path d="M220 90 Q 240 90 250 110" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
-            </svg>
           </div>
 
           <h1>start where it hurts.</h1>
