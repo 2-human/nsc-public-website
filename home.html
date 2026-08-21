@@ -306,12 +306,22 @@
     .form-input::placeholder, .form textarea::placeholder { color: rgba(0,0,0,0.4); }
     .form-input:focus, .form textarea:focus { outline: none; border-color: var(--mute); }
     .form-action { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .form-status {
+      margin-top: 16px; font-size: 14.5px; line-height: 1.6; min-height: 1.6em;
+      color: var(--mute);
+    }
+    .form-status[data-state="ok"]    { color: #15803d; }
+    .form-status[data-state="error"] { color: #be185d; }
     .form button {
       background: var(--ink); color: var(--paper); border: none;
       padding: 12px 24px; font-family: inherit; font-size: 15px; font-weight: 500;
-      border-radius: 8px; cursor: not-allowed; opacity: 0.5;
+      border-radius: 8px; cursor: pointer;
+      transition: opacity 0.2s ease;
     }
-    .form-note { font-size: 13px; color: rgba(0,0,0,0.4); font-style: italic; }
+    .form button:hover { opacity: 0.85; }
+    .form button:disabled { cursor: wait; opacity: 0.5; }
+    .form button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
     /* ---------- Footer ---------- */
     footer {
@@ -527,15 +537,21 @@
       <h2>What&rsquo;s on <em>your mind</em>?</h2>
       <p class="connect-intro">Tell me what you are working toward, and what is getting in the way of it right now.</p>
 
-      <form class="form" onsubmit="event.preventDefault();">
+      <form class="form" id="contact-form" onsubmit="event.preventDefault();">
         <label class="form-label" for="cf-email">Email</label>
-        <input class="form-input" id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" />
+        <input class="form-input" id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
         <label class="form-label" for="cf-message">Message</label>
-        <textarea id="cf-message" name="message" placeholder="What's on your mind?"></textarea>
-        <div class="form-action">
-          <button type="submit" disabled>Send</button>
-          <span class="form-note">Form is a placeholder. Not yet wired up.</span>
+        <textarea id="cf-message" name="message" placeholder="What's on your mind?" required></textarea>
+
+        <div class="hp" aria-hidden="true">
+          <label for="cf-website">Website</label>
+          <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
         </div>
+
+        <div class="form-action">
+          <button type="submit">Send</button>
+        </div>
+        <p class="form-status" data-form-status role="status" aria-live="polite"></p>
       </form>
     </section>
 
@@ -718,5 +734,8 @@
     go(0);
 
   </script>
+
+  <script src="./contact-form.config.js"></script>
+  <script type="module" src="./contact-form.js"></script>
 </body>
 </html>

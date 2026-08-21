@@ -359,6 +359,13 @@
     }
     .cta__form input::placeholder { color: var(--mute); font-style: italic; }
     .cta__form input:focus { outline: none; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .cta__status {
+      margin-top: 18px; font-size: 14.5px; line-height: 1.6; min-height: 1.6em;
+      color: var(--mute);
+    }
+    .cta__status[data-state="ok"]    { color: #15803d; }
+    .cta__status[data-state="error"] { color: #be185d; }
     .cta__form textarea {
       width: 100%;
       min-height: 160px;
@@ -387,11 +394,12 @@
       font-family: inherit;
       font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
       font-weight: 800;
-      opacity: 0.5; cursor: not-allowed;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
     }
-    .cta__note {
-      font-size: 12.5px; color: var(--mute); font-style: italic;
-    }
+    .cta__submit:hover { opacity: 0.85; }
+    .cta__submit:disabled { cursor: wait; opacity: 0.55; }
+    .cta__submit:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
     /* ───────── Footer ───────── */
     .foot {
@@ -785,18 +793,24 @@
             <p class="cta__sub">I'll tell you what your Growth Fix could look like, and what it would cost to find out whether the longer engagement is worth it for both of us.</p>
           </div>
           <div class="cta__form">
-            <form onsubmit="event.preventDefault();">
+            <form id="contact-form" onsubmit="event.preventDefault();">
               <label class="cta__label" for="gf-email">Email</label>
-              <input id="gf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" />
+              <input id="gf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
               <label class="cta__label" for="gf-message">Message</label>
-              <textarea id="gf-message" name="message" placeholder="Pipeline, marketing, brand, or something else? Tell me what you're seeing."></textarea>
+              <textarea id="gf-message" name="message" placeholder="Pipeline, marketing, brand, or something else? Tell me what you're seeing." required></textarea>
+
+              <div class="hp" aria-hidden="true">
+                <label for="gf-website">Website</label>
+                <input id="gf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+
               <div class="cta__action">
-                <button type="submit" class="cta__submit" disabled>
+                <button type="submit" class="cta__submit">
                   Send
                   <svg><use href="#arrow"/></svg>
                 </button>
-                <span class="cta__note">Form is a placeholder. Not yet wired up.</span>
               </div>
+              <p class="cta__status" data-form-status role="status" aria-live="polite"></p>
             </form>
           </div>
         </div>
@@ -827,5 +841,7 @@
     </div>
   </footer>
 
+  <script src="./contact-form.config.js"></script>
+  <script type="module" src="./contact-form.js"></script>
 </body>
 </html>
