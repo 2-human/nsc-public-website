@@ -41,7 +41,10 @@ const msg = (k) => (CONFIG && CONFIG.MESSAGES && CONFIG.MESSAGES[k]) || "";
 
 function pageSlug() {
   const f = location.pathname.split("/").pop() || "index.html";
-  return f.replace(/\.html$/, "") || "index";
+  const slug = f.replace(/\.html$/, "") || "index";
+  // the home page serves at the root, so its filename is index; record it as
+  // "home" so lead records stay readable and match what came before the move.
+  return slug === "index" ? "home" : slug;
 }
 
 function utmBundle() {
